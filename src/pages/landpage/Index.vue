@@ -15,6 +15,7 @@
       </q-toolbar-title>
       <nav class="desktop-only">
         <q-btn flat dense class="q-ma-xs" label="Participações" @click.native="participa"/>
+        <q-btn flat dense class="q-ma-xs" label="programa" @click.native="programa"/>
         <q-btn flat dense class="q-ma-xs" label="Hotelaria" @click.native="hotelaria"/>
         <q-btn flat dense class="q-ma-xs" label="Valores" @click.native="preco"/>
       </nav>
@@ -22,13 +23,9 @@
     </q-toolbar>
     <q-layout-drawer
       content-class="bg-neutral"
-      content-style="{color: 'black', padding: '20px', padding-top: '70px'}"
       side="left"
-      overlay="true"
       behavior="mobile"
-      breakpoint="768"
-      v-model="drawer"
-    >
+      v-model="drawer">
       <p v-if="currentUser" class="bg-primary text-white q-pa-md">
         <b>Usuário:</b>
         {{currentUser.email}}
@@ -133,6 +130,8 @@
         </video>
       </div>
       <div id="preletores"></div>
+      
+      <!-- Participações -->
       <section class="base3 bg-black">
         <div class="container flex flex-center">
           <div class="text-white q-pa-md">
@@ -252,6 +251,134 @@
           </div>
         </div>
       </section>
+
+      <div id="programa"></div>
+      
+      <!-- Programa -->
+      <section class="base4">
+        <div class="base44"></div>
+        <div class="container" >
+          <div class="text-white q-pa-md flex flex-center">
+            <h3 class="preletor z-top">Programação</h3>
+          </div>
+          <div class="tabelaprograma q-pa-md flex flex-center">
+            <q-tabs class="shadow-1" animated swipeable color="secondary" align="justify">
+              <q-tab default name="quatro" slot="title" label="Quarta-feira" />
+              <q-tab name="cinco" slot="title" label="Quinta-feira" />
+              <q-tab name="seis" slot="title" label="Sexta-feira" />
+              <q-tab name="sete" slot="title" label="Sábado" />
+
+
+              <q-tab-pane class="text-white q-pa-md" name="quatro">
+                  <div class="row">
+                    <div class="col-4"><h5>Início</h5></div><div class="col-auto"><h5>Programação</h5></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">9h00</div><div class="col-auto">Inscrições e check-in</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">17h30</div><div class="col-auto">Tardezinhas</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">19h15</div><div class="col-auto">Culto de abertura</div>
+                  </div>
+              </q-tab-pane>
+              <q-tab-pane class="text-white q-pa-md" name="cinco">
+                  <div class="row">
+                    <div class="col-4"><h5>Início</h5></div><div class="col-auto"><h5>Programação</h5></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">8h30</div><div class="col-auto">Oração</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">9h00</div><div class="col-auto">Celebração</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">10h30</div><div class="col-auto">Jornada de Conteúdo</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">12h00</div><div class="col-auto">Almoço|Arte e cultura</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">13h30</div><div class="col-auto">Jornada de Conteúdo</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">15h30</div><div class="col-auto">Jornada de Conteúdo</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">17h30</div><div class="col-auto">Tardezinhas</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">19h15</div><div class="col-auto">Celebração</div>
+                  </div>
+              </q-tab-pane>
+              <q-tab-pane class="text-white q-pa-md" name="seis">
+                  <div class="row">
+                    <div class="col-4"><h5>Início</h5></div><div class="col-auto"><h5>Programação</h5></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">8h30</div><div class="col-auto">Oração</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">9h00</div><div class="col-auto">Celebração</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">10h30</div><div class="col-auto">Jornada de Conteúdo</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">12h00</div><div class="col-auto">Almoço|Arte e cultura</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">13h30</div><div class="col-auto">Jornada de Conteúdo</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">15h30</div><div class="col-auto">Jornada de Conteúdo</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">17h30</div><div class="col-auto">Tardezinhas</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">19h15</div><div class="col-auto">Celebração</div>
+                  </div>
+              </q-tab-pane>
+              <q-tab-pane class="text-white q-pa-md" name="sete">
+                  <div class="row">
+                    <div class="col-4"><h5>Início</h5></div><div class="col-auto"><h5>Programação</h5></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">8h30</div><div class="col-auto">Oração</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">9h00</div><div class="col-auto">Celebração</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">10h30</div><div class="col-auto">Jornada de Conteúdo</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">12h00</div><div class="col-auto">Almoço|Arte e cultura</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">13h30</div><div class="col-auto">Jornada de Conteúdo</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">15h30</div><div class="col-auto">Jornada de Conteúdo</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">17h30</div><div class="col-auto">Tardezinhas</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">19h15</div><div class="col-auto">Celebração</div>
+                  </div>
+                  <div class="row">
+                    <div class="col-4">23h00</div><div class="col-auto">Lual</div>
+                  </div>
+              </q-tab-pane>
+            </q-tabs>
+          </div>
+        </div>
+        
+      </section>
+
 
       <!-- Hotalaria -->
       <div id="hotelaria"></div>
@@ -554,6 +681,13 @@ export default {
     })
   },
   methods: {
+    programa() {
+      const ele = document.getElementById("programa"); // You need to get your element here
+      const target = getScrollTarget(ele);
+      const offset = ele.offsetTop - ele.scrollHeight;
+      const duration = 1000;
+      setScrollPosition(target, offset, duration);
+    },
     hotelaria() {
       const ele = document.getElementById("hotelaria"); // You need to get your element here
       const target = getScrollTarget(ele);
@@ -672,5 +806,15 @@ export default {
 
 .lulo {
   font-family: lulo
+}
+
+.tabelaprograma {
+  width: 100%;
+  min-width: 320px;
+}
+
+.q-tab-pane div {
+  padding: 4px;
+  z-index: 1;
 }
 </style>

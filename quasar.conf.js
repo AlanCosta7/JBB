@@ -106,7 +106,11 @@ module.exports = function (ctx) {
         'QInnerLoading',
         'QChatMessage',
         'QPopover',
-        'QParallax'
+        'QParallax',
+        'QTabs',
+        'QTab',
+        'QTabPane',
+        'QRouteTab'
       ],
       directives: [
         'Ripple',

@@ -20,7 +20,7 @@ const $auth = $fbApp.auth()
 const $db = firebase.database()
 const $firestore = firebase.firestore()
 //const $storage = firebase.storage()
-$firestore.settings({ timestampsInSnapshots: true })
+//$firestore.settings({ timestampsInSnapshots: true })
 
 // Enable logging
 // firebase.database.enableLogging(!!process.env.DEV)
