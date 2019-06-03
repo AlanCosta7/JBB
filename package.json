@@ -1,10 +1,10 @@
 {
-  "name": "jbb",
-  "version": "0.0.1",
-  "description": "A Quasar Framework app",
-  "productName": "jbb app",
-  "cordovaId": "org.cordova.quasar.app",
-  "author": "",
+  "name": "despertar2019",
+  "version": "0.0.5",
+  "description": "Conferência organizada pela Juventude Batista Brasileira em 2019",
+  "productName": "Despertar 2019",
+  "cordovaId": "despertar19.com.br",
+  "author": "Alan Costa",
   "private": true,
   "scripts": {
     "start": "quasar dev",
