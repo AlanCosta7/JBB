@@ -1,10 +1,78 @@
 <template class="templatehome">
   <q-page id="page-index">
+    <q-toolbar color="primary" class="row fixed z-max">
+      <q-btn @click="drawer = !drawer" flat round dense icon="menu" class="q-mr-lg"/>
+      <q-toolbar-title>
+        <q-btn
+          flat
+          dense
+          to="/"
+          color="text-white"
+          label="Despertar 2019"
+          class="q-pa-none despertar"
+        />
+        <div slot="subtitle" class="rio">Rio de Janeiro/RJ</div>
+      </q-toolbar-title>
+      <nav class="desktop-only">
+        <q-btn flat dense class="q-ma-xs" label="Participações" @click.native="participa"/>
+        <q-btn flat dense class="q-ma-xs" label="Valores" @click.native="preco"/>
+      </nav>
+      <q-btn
+        round
+        size="sm"
+        @click.native="jbbtvclick()"
+        icon="live_tv"
+        class="btntv q-mr-xs"
+      />
+    </q-toolbar>
+    <q-layout-drawer
+      content-class="bg-neutral"
+      content-style="{color: 'black', padding: '20px', padding-top: '70px'}"
+      side="left"
+      overlay="true"
+      behavior="mobile"
+      breakpoint="768"
+      v-model="drawer"
+    >
+      <p v-if="currentUser" class="bg-primary text-white q-pa-md">
+        <b>Usuário:</b>
+        {{currentUser.email}}
+      </p>
+
+      <!-- Lista de menu -->
+      <template>
+        <q-item link @click.native="programa()">
+          <q-item-main class="text-no-wrap" label="Home" sublabel="Página principal"/>
+        </q-item>
+        <q-item link @click.native="vip()" v-if="!currentUser">
+          <q-item-main class="text-no-wrap" label="VIP" sublabel="Restrito para inscritos"/>
+        </q-item>
+        <q-item link @click.native="inscricao()">
+          <q-item-main class="text-no-wrap" label="Inscrição" sublabel="Já fez a sua?"/>
+        </q-item>
+        <q-item link @click.native="comochegar()">
+          <q-item-main
+            class="text-no-wrap"
+            label="Como chegar?"
+            sublabel="Pra você não fica perdido"
+          />
+        </q-item>
+        <q-item link @click.native="checkin()" v-if="currentUser">
+          <q-item-main class="text-no-wrap" label="Checkin" sublabel="Registre sua presença"/>
+        </q-item>
+        <q-item link @click.native="eleição()" v-if="currentUser">
+          <q-item-main class="text-no-wrap" label="Eleição" sublabel="Escolha seu representante"/>
+        </q-item>
+        <q-item link @click.native="sair()" v-if="currentUser" class="bg-negative text-white">
+          <q-item-main class="text-no-wrap" label="Sair"/>
+        </q-item>
+      </template>
+    </q-layout-drawer>
     <div>
       <div class="fundoalfa"></div>
       <div class="paralax flex flex-center">
         <img
-          src="../assets/landpage/BIRDS.png"
+          src="~assets/landpage/BIRDS.png"
           class="birds desktop-only"
           alt="imagem de pássaros voando"
         >
@@ -24,7 +92,7 @@
           </div>
           <div class="column items-center">
             <img
-              src="../assets/landpage/Logo_Despertar2019.png"
+              src="~assets/landpage/Logo_Despertar2019.png"
               width="320px"
               class="relative-position"
               alt="logo do despertar"
@@ -53,22 +121,23 @@
       <img
         width="100%"
         class="calcada1 desktop-only"
-        src="../assets/landpage/ZigZag.png"
+        src="~assets/landpage/ZigZag.png"
         alt="calçada copacabana"
       >
 
       <div class="column flex flex-center base2 desktop-only">
         <h2 class="text-weight-bold text-white desktop-only h2desperte">Desperte-se</h2>
         <q-btn @click="playvideo()" size="90px" flat round>
-          <img width="100%" class="desktop-only" src="../assets/landpage/play.png" alt="botão play">
+          <img width="100%" class="desktop-only" src="~assets/landpage/play.png" alt="botão play">
         </q-btn>
         <h2 class="text-weight-light text-white h2desperte2">Aperte o play!</h2>
 
         <video autoplay muted loop class="myVideo1">
-          <source src="../assets/landpage/novotease.mp4" type="video/mp4">
-          <source src="../assets/landpage/novotease.webm" type="video/webm">
+          <source src="~assets/landpage/novotease.mp4" type="video/mp4">
+          <source src="~assets/landpage/novotease.webm" type="video/webm">
         </video>
       </div>
+      <div id="preletores"></div>
       <section class="base3 bg-black">
         <div class="container flex flex-center">
           <div class="text-white q-pa-md">
@@ -188,6 +257,7 @@
           </div>
         </div>
       </section>
+      <div id="preco"></div>
       <div class="column flex flex-center paralax2 desktop-only">
         <div class="bgcolum column flex flex-center">
           <h4
@@ -234,19 +304,19 @@
         </div>
 
         <img
-          src="../assets/landpage/Maracana.png"
+          src="~assets/landpage/Maracana.png"
           class="maracana desktop-only"
           width="50%"
           alt="Maracana"
         >
         <img
-          src="../assets/landpage/Niteroi.png"
+          src="~assets/landpage/Niteroi.png"
           class="niteroi desktop-only"
           width="50%"
           alt="niteroi"
         >
         <img
-          src="../assets/landpage/Bondinho.png"
+          src="~assets/landpage/Bondinho.png"
           class="bondinho desktop-only"
           width="50%"
           alt="bondinho"
@@ -288,25 +358,27 @@
         </div>
 
         <img
-          src="../assets/landpage/Maracana.png"
+          src="~assets/landpage/Maracana.png"
           class="maracana desktop-only"
           width="50%"
           alt="maracana"
         >
         <img
-          src="../assets/landpage/Niteroi.png"
+          src="~assets/landpage/Niteroi.png"
           class="niteroi desktop-only"
           width="50%"
           alt="niteroi"
         >
         <img
-          src="../assets/landpage/Bondinho.png"
+          src="~assets/landpage/Bondinho.png"
           class="bondinho desktop-only"
           width="50%"
           alt="bondinho"
         >
       </div>
     </div>
+
+    <!-- Modal Video Teaser -->
     <q-modal v-model="opened" class="z-max desktop-only" maximized>
       <q-btn
         v-if="opened"
@@ -321,39 +393,59 @@
       <iframe width="100%" height="100%" :src="video" class="videoteaser" frameborder="0"></iframe>
     </q-modal>
 
+    <!-- Modal Inscrição Desktop-->
     <q-modal v-model="openedinscri" class="z-max desktop-only">
+      <q-modal-layout>
+        <q-toolbar slot="header">
+          <q-toolbar-title>Inscrição</q-toolbar-title>
+        </q-toolbar>
+        <iframe
+          width="850px"
+          height="750px"
+          id="inscricao"
+          src="https://www.pallua.com.br/captacao/projeto/evento_despertar_2019"
+        ></iframe>
+      </q-modal-layout>
+    </q-modal>
+
+     <!-- Modal Inscrição Mobile-->
+    <q-modal v-model="openedinscri" class="z-max mobile-only">
+      <q-modal-layout>
+        <q-toolbar slot="header">
+          <q-toolbar-title>Inscrição</q-toolbar-title>
+        </q-toolbar>
+        <iframe
+          width="100%"
+          height="90%"
+          id="inscricao"
+          src="https://www.pallua.com.br/captacao/projeto/evento_despertar_2019"
+        ></iframe>
+        <q-btn color="negative" label="Cancelar" @click="openedinscri = false"></q-btn>
+      </q-modal-layout>
+    </q-modal>
+
+    <!-- Modal Maps Desktop-->
+    <q-modal v-model="openedmap" class="z-max desktop-only">
       <iframe
+        src="https://www.google.com/maps/d/u/0/embed?mid=1ALnS8JLUtWxOfq5C8E2m15NY-RhCquBt"
         width="850px"
         height="750px"
-        id="inscricao"
-        src="https://www.pallua.com.br/captacao/projeto/evento_despertar_2019"
       ></iframe>
     </q-modal>
 
-    <div class="z-top footer bg-white">
+    <!-- Modal Maps Mobile-->
+    <q-modal v-model="openedmap" class="z-max mobile-only">
+      <iframe
+        src="https://www.google.com/maps/d/u/0/embed?mid=1ALnS8JLUtWxOfq5C8E2m15NY-RhCquBt"
+        width="100%"
+        height="90%"
+      ></iframe>
+      <q-btn color="negative" label="Cancelar" @click="openedmap = false"></q-btn>
+    </q-modal>
+
+    <div class="footer bg-white">
       <!-- footer content -->
-      <div class="row">
-        <div class="col-lg-2 col-xs-12 col-md-2 self-start">
-          <div class="q-pa-lg">
-            <p class="sub1">Organização</p>
-            <img width="150" class="imgJBB" src="../assets/landpage/JBB.png" alt="logo JBB">
-          </div>
-        </div>
-        <div class="col-lg-7 col-xs-12 col-md-5 self-start">
-          <div class="q-pa-lg">
-            <p class="sub1">Apoio</p>
-            <img width="84" src="../assets/landpage/CBB.png" alt="logo CBB">
-            <img width="84" src="../assets/landpage/JBC.png" alt="logo JBC">
-            <img width="84" src="../assets/landpage/JUBERJ.png" alt="logo JUBERJ">
-          </div>
-        </div>
-        <div class="col-lg-3 col-xs-12 col-md-5 self-start">
-          <div class="q-pa-lg">
-            <p class="sub1">Siga-nos</p>
-            <BaseSocial/>
-          </div>
-        </div>
-      </div>
+      <BaseSocial/>
     </div>
   </q-page>
 </template>
@@ -362,14 +454,19 @@
 import { mapGetters } from "vuex";
 import Vuex from "vuex";
 import BaseSocial from "components/layout/base-social.vue";
+import { scroll } from "quasar";
+const { getScrollTarget, setScrollPosition } = scroll;
 
 export default {
   name: "PageIndex",
   components: { BaseSocial },
   data() {
     return {
+      jbbtv: false,
+      drawer: false,
       opened: false,
       openedinscri: false,
+      openedmap: false,
       hidden1: false,
       hidden2: false,
       hidden3: false,
@@ -385,11 +482,26 @@ export default {
       loading: "loading",
       error: "error",
       user: "user",
+      currentUser: "currentUser",
       inscrito: "null",
       video: "video"
     })
   },
   methods: {
+    preco() {
+      const ele = document.getElementById("preco"); // You need to get your element here
+      const target = getScrollTarget(ele);
+      const offset = ele.offsetTop - ele.scrollHeight;
+      const duration = 1000;
+      setScrollPosition(target, offset, duration);
+    },
+    participa() {
+      const ele = document.getElementById("preletores"); // You need to get your element here
+      const target = getScrollTarget(ele);
+      const offset = ele.offsetTop - ele.scrollHeight;
+      const duration = 1000;
+      setScrollPosition(target, offset, duration);
+    },
     principal() {
       this.$router.push("/programacao");
     },
@@ -398,11 +510,61 @@ export default {
       this.opened = true;
     },
     inscricao() {
-      this.$router.push("/inscricao");
-    }
+      this.openedinscri = true;
+    },
+    vip() {
+      this.$router.push("/login");
+      this.drawer = false;
+    },
+    comochegar() {
+      this.openedmap = true;
+    },
+    jbbtvclick() {
+      this.$store.dispatch('assistirVideo')
+      this.opened = true
+    },
   }
 };
 </script>
 
 <style>
+.btntv {
+  background-image: linear-gradient(red, yellow);
+  color: white;
+}
+
+.btntv2 {
+  background-image: linear-gradient(red, yellow);
+  color: white;
+}
+
+.rio {
+  font-family: lulo;
+  font-size: 0.75em;
+}
+
+.despertar {
+  font-family: lulobold;
+  font-size: 0.75em;
+}
+
+.btnmenu {
+  font-family: lulobold;
+  font-size: 0.75em;
+}
+.rota {
+  padding-top: 50px;
+}
+
+.center {
+  position: absolute;
+  left: 45%;
+  margin-top: 10px;
+  z-index: 1;
+}
+
+.iframe {
+  z-index: 0;
+  margin-top: 60px;
+}
 </style>

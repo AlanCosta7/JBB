@@ -2,18 +2,25 @@
   <q-layout>
     <q-layout-header>
       <q-toolbar color="primary" class="row fixed">
-        <q-btn @click="drawer = !drawer" flat round dense icon="menu" class="q-mr-lg" />
+        <q-btn @click="drawer = !drawer" flat round dense icon="menu" class="q-mr-lg mobile-only"/>
         <q-toolbar-title>
           <q-btn flat dense to='/' label="Despertar 2019" class="q-pa-none despertar" />
           <div slot="subtitle" class="rio">Rio de Janeiro/RJ</div>
         </q-toolbar-title>
-        <q-btn v-if="btnjbbtv" round size="sm" @click.native="jbbtvclick()" icon="live_tv" class="btntv q-mr-xs" />
+        <nav class="desktop-only">
+          <q-btn flat dense label="VIP" @click.native="vip()" />
+          <q-btn flat dense label="Inscrição" @click.native="inscricao()" />
+          <q-btn flat dense label="Como chegar"  @click.native="comochegar()" />
+        </nav>
+          <q-btn v-if="btnjbbtv" round size="sm" @click.native="jbbtvclick()" icon="live_tv" class="btntv q-mr-xs" />
       </q-toolbar>
     </q-layout-header>
-    <q-layout-drawer content-class="bg-neutral" content-style="{color: 'black', padding: '20px', padding-top: '70px'}" 
-    side="left" overlay="true"
-    behavior="mobile"
-    breakpoint="768"
+    <q-layout-drawer 
+      content-class="bg-neutral" 
+      content-style="{color: 'black', padding: '20px', padding-top: '70px'}" 
+      side="left" overlay="true"
+      behavior="mobile"
+      breakpoint="768"
       v-model="drawer">
       <p v-if="currentUser" class="bg-primary text-white q-pa-md"><b>Usuário:</b> {{currentUser.email}}</p>
 
@@ -24,9 +31,6 @@
         </q-item>
         <q-item link @click.native="vip()" v-if="!currentUser">
           <q-item-main class="text-no-wrap" label="VIP" sublabel="Restrito para inscritos" />
-        </q-item>
-        <q-item link @click.native="aovivo()">
-          <q-item-main class="text-no-wrap" label="Feed" sublabel="Leia as novidades" />
         </q-item>
         <q-item link @click.native="inscricao()">
           <q-item-main class="text-no-wrap" label="Inscrição" sublabel="Já fez a sua?" />
@@ -48,33 +52,16 @@
     </q-layout-drawer>
 
     <q-page-container>
-      <q-modal v-model="jbbtv" maximized v-if="jbbtv" class="flex flex-center justify-center z-max">
-        <q-toolbar color="primary">
-          <q-toolbar-title>
-            <q-btn flat dense to='/' label="Despertar 2019" class="q-pa-none despertar" />
-
-            <div slot="subtitle" class="rio">Rio de Janeiro/RJ</div>
-          </q-toolbar-title>
-          <q-btn v-if="btnjbbtv" round size="sm" @click.native="sairtv()" icon="close" class="btntv q-mr-lg" />
-          <div class="desktop-only">
-            <q-btn color="white" @click="programa()" flat class="btn">Home</q-btn>
-            <q-btn color="white" @click="inscricao()" class="btn" flat v-if="!currentUser">inscrição</q-btn>
-            <q-btn color="white" @click="checkin()" class="btn" flat v-if="currentUser">Check-in</q-btn>
-            <q-btn color="white" @click="comochegar()" flat class="btn">Como Chegar?</q-btn>
-          </div>
-        </q-toolbar>
-
-        <div style="background: black">
+      <q-modal v-model="jbbtv" maximized v-if="jbbtv">
+        <div style="background: black" class="">
           <div class="q-video">
-            <iframe style="height: 500px; width:100%" :src=video frameborder="0" allowfullscreen class="mobile-only"></iframe>
-            <iframe style="height: 700px; width:100%" :src=video frameborder="0" allowfullscreen class="desktop-only"></iframe>
+            <q-btn v-if="btnjbbtv" round size="md" @click.native="sairtv()" icon="close" class="btntv center z-max" />
+            <iframe class="iframe" style="height: 500px; width:100%" :src=video frameborder="0" allowfullscreen></iframe>
           </div>
         </div>
       </q-modal>
       <router-view class="rota"/>
-      <q-page-sticky position="bottom-right" :offset="[50, 50]">
-      </q-page-sticky>
-      <div class="row z-max fixed-bottom mobile-only">
+      <div class="row fixed-bottom mobile-only">
         <q-btn color="primary" @click="programa()" icon="home" v-if="!currentUser" class="btn col"></q-btn>
         <q-btn color="primary" @click="checkin()" class="btn col" v-if="currentUser">Check-in</q-btn>
         <q-btn color="primary" @click="aovivo()" class="btn col-4">Feed</q-btn>
@@ -116,6 +103,13 @@
       this.loading = false
     },
     methods: {
+      participa () {
+        const ele = document.getElementById('participa') // You need to get your element here
+        const target = getScrollTarget(ele)
+        const offset = ele.offsetTop - ele.scrollHeight
+        const duration = 1000
+        setScrollPosition(target, offset, duration)
+      },
       vip() {
         this.$router.push('/login')
         this.drawer = false
@@ -188,4 +182,15 @@
     padding-top: 50px;
   }
 
+  .center{
+    position: absolute;
+    left: 45%;
+    margin-top: 10px;
+    z-index: 1;
+  }
+
+  .iframe{
+    z-index: 0;
+    margin-top: 60px
+  }
 </style>
