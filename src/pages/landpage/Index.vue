@@ -15,15 +15,10 @@
       </q-toolbar-title>
       <nav class="desktop-only">
         <q-btn flat dense class="q-ma-xs" label="Participações" @click.native="participa"/>
+        <q-btn flat dense class="q-ma-xs" label="Hotelaria" @click.native="hotelaria"/>
         <q-btn flat dense class="q-ma-xs" label="Valores" @click.native="preco"/>
       </nav>
-      <q-btn
-        round
-        size="sm"
-        @click.native="jbbtvclick()"
-        icon="live_tv"
-        class="btntv q-mr-xs"
-      />
+      <q-btn round size="sm" @click.native="jbbtvclick()" icon="live_tv" class="btntv q-mr-xs"/>
     </q-toolbar>
     <q-layout-drawer
       content-class="bg-neutral"
@@ -257,6 +252,75 @@
           </div>
         </div>
       </section>
+
+      <!-- Hotalaria -->
+      <div id="hotelaria"></div>
+      <section class="base3 bg-primary">
+        <div class="container flex flex-center">
+          <div class="text-white q-pa-md">
+            <div class="flex flex-center">
+              <div class="text-white">
+                <h3 class="preletor">Hotelaria</h3>
+              </div>
+              <div>
+              <h5 class="q-px-md flex flex-center">Aqui você encontra as melhores opções para ficar bem acomodado durante o Despertar19.</h5>
+              <div class="row">
+                <div class="col-lg-6 col-xs-12 cardhotel q-pa-lg">
+                  <div inline class="bg-white">
+                    <div class="flex flex-center">
+                      <img width="220px" height="auto" src="~assets/landpage/costaf.png">
+                    </div>
+                    <div>
+                      <div class="text-black q-pa-lg">
+                        Se você procura uma acomodação com privacidade para você e sua família, indicamos a agência costa family que possui vários pacotes de hospedagem. Entre em contato e reserve a sua.
+                        <p>WhatsApp: (21) 970359043</p>
+                        <p>Telefone Comercial: (21) 31726796</p>
+                        <p>e-mail: edivan@costafamily.com.br</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-6 col-xs-12  cardhotel q-pa-lg">
+                  <div inline class="bg-white">
+                    <div class="flex flex-center">
+                      <img width="220px" height="auto" src="~assets/landpage/econ.png">
+                    </div>
+                    <div>
+                      <div class="text-black q-pa-lg">
+                        Se você é do tipo mochileiro e procura uma experiência mais orgânica para estar perto da galera, a JBC está preparando uma excelênte experiência de hospedagem econômica que cabe no seu bolso.
+                        <br>
+                        <br>
+                        <q-btn label="Reserve sua hospedagem" @click="hopedagem()" color="teal" class="q-mt-xl"></q-btn>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+              </div>
+              <div class="row flex flex-center">
+                <div class="line col"></div>
+                <div class="circulo q-pa-sm">
+                  <q-icon name="add" size="xl"></q-icon>
+                </div>
+                <div class="line col"></div>
+              </div>
+
+              <div class="flex flex-center">
+                <q-card class="q-ma-lg q-pa-lg bg-teal">
+                  <div class="column flex flex-center">
+                    <q-icon name="flight" class="aviao"></q-icon>
+                    <h3 class="lulobold">18% de desconto</h3>
+                    <h6 class="lulo">exclusivo nas passagens aéreas. Entre em contato com a costa family e garanta logo a sua...</h6>
+                  </div>
+                </q-card>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div id="preco"></div>
       <div class="column flex flex-center paralax2 desktop-only">
         <div class="bgcolum column flex flex-center">
@@ -408,7 +472,7 @@
       </q-modal-layout>
     </q-modal>
 
-     <!-- Modal Inscrição Mobile-->
+    <!-- Modal Inscrição Mobile-->
     <q-modal v-model="openedinscri" class="z-max mobile-only">
       <q-modal-layout>
         <q-toolbar slot="header">
@@ -455,6 +519,8 @@ import { mapGetters } from "vuex";
 import Vuex from "vuex";
 import BaseSocial from "components/layout/base-social.vue";
 import { scroll } from "quasar";
+import { openURL } from 'quasar'
+
 const { getScrollTarget, setScrollPosition } = scroll;
 
 export default {
@@ -488,6 +554,13 @@ export default {
     })
   },
   methods: {
+    hotelaria() {
+      const ele = document.getElementById("hotelaria"); // You need to get your element here
+      const target = getScrollTarget(ele);
+      const offset = ele.offsetTop - ele.scrollHeight;
+      const duration = 1000;
+      setScrollPosition(target, offset, duration);
+    },
     preco() {
       const ele = document.getElementById("preco"); // You need to get your element here
       const target = getScrollTarget(ele);
@@ -520,9 +593,12 @@ export default {
       this.openedmap = true;
     },
     jbbtvclick() {
-      this.$store.dispatch('assistirVideo')
-      this.opened = true
+      this.$store.dispatch("assistirVideo");
+      this.opened = true;
     },
+    hopedagem() {
+      openURL('https://www.e-inscricao.com/juventudebatistacarioca/hospedagemeconomicadespertar?fbclid=IwAR2trydTKNe3yfT0mXOnlxiiLNhxMMasdPpnJqjx9inruAsVr8xxo-PSESk')
+    }
   }
 };
 </script>
@@ -566,5 +642,35 @@ export default {
 .iframe {
   z-index: 0;
   margin-top: 60px;
+}
+
+.cardhotel {
+  width: 320px;
+}
+
+.line {
+  border-top-width: 1px;
+  border-top-style: solid;
+  border-top-color: #fff; 
+
+}
+
+.circulo {
+  border-radius: 100%;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #fff;
+}
+
+.aviao {
+  font-size: 8em
+}
+
+.lulobold {
+  font-family: lulobold
+}
+
+.lulo {
+  font-family: lulo
 }
 </style>
