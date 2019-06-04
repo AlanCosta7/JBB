@@ -132,7 +132,7 @@
       <div id="preletores"></div>
       
       <!-- Participações -->
-      <section class="base3 bg-black">
+      <section class="base5">
         <div class="container flex flex-center">
           <div class="text-white q-pa-md">
             <h3 class="preletor">Preletores</h3>
