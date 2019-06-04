@@ -22,13 +22,14 @@
 
   .base4 {
     position: relative;
-    height: auto;
+    min-height: 750px;
     padding-bottom: 200px;
     background-image: url("../assets/landpage/backGround.jpg");
     background-attachment: fixed;
     background-position: top;
     background-repeat: no-repeat;
-    background-size: cover;    
+    background-size: cover; 
+    z-index: 1   
   }
 
   .base5 {
@@ -40,12 +41,18 @@
   }
   .base44 {
     position absolute
-    background: rgba(0,0,0,0.75);
-    min-height: 950px;
+    background: rgba(0,0,100,0.55);
+    min-height: 1300px;
     width: 100%;
     z-index 0
   }
-
+  .base55 {
+    position absolute
+    background: rgba(0,0,100,0.55);
+    min-height: 750px;
+    width: 100%;
+    z-index 0
+  }
   .paralax {
     padding-top: 50px;
     height: 850px;
@@ -387,6 +394,8 @@
 
   .preletor {
     border-left 5px solid #c88b48 
-    padding-left: 10px
+    padding-left: 10px;
+        font-family: lulobold
+
   }
 }

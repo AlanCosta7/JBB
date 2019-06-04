@@ -132,10 +132,11 @@
       <div id="preletores"></div>
       
       <!-- Participações -->
-      <section class="base5">
-        <div class="container flex flex-center">
-          <div class="text-white q-pa-md">
-            <h3 class="preletor">Preletores</h3>
+      <section class="base4">
+        <div class="base44"></div>
+        <div class="container">
+          <div class="text-white q-pa-md flex flex-center">
+            <h3 class="preletor z-top">Preletores</h3>
           </div>
           <div class="row flex flex-center">
             <div @mouseover="hidden3 = true" @mouseleave="hidden3 = false" class="col-auto">
@@ -191,8 +192,8 @@
               </q-card>
             </div>
 
-            <div class="text-white q-pa-xl">
-              <h3 class="preletor">Participação Musical</h3>
+            <div class="text-white q-pa-md flex flex-center">
+              <h3 class="preletor z-top">Participações Musicais</h3>
             </div>
             <div class="row flex flex-center">
               <div @mouseover="hidden6 = true" @mouseleave="hidden6 = false" class="col-auto">
@@ -256,12 +257,12 @@
       
       <!-- Programa -->
       <section class="base4">
-        <div class="base44"></div>
+        <div class="base55"></div>
         <div class="container" >
           <div class="text-white q-pa-md flex flex-center">
             <h3 class="preletor z-top">Programação</h3>
           </div>
-          <div class="tabelaprograma q-pa-md flex flex-center">
+          <div class="tabelaprograma q-pa-xs flex flex-center">
             <q-tabs class="shadow-1" animated swipeable color="secondary" align="justify">
               <q-tab default name="quatro" slot="title" label="Quarta-feira" />
               <q-tab name="cinco" slot="title" label="Quinta-feira" />
@@ -269,7 +270,7 @@
               <q-tab name="sete" slot="title" label="Sábado" />
 
 
-              <q-tab-pane class="text-white q-pa-md" name="quatro">
+              <q-tab-pane class="text-white q-pa-xs" name="quatro">
                   <div class="row">
                     <div class="col-4"><h5>Início</h5></div><div class="col-auto"><h5>Programação</h5></div>
                   </div>
@@ -390,7 +391,7 @@
                 <h3 class="preletor">Hotelaria</h3>
               </div>
               <div>
-              <h5 class="q-px-md flex flex-center">Aqui você encontra as melhores opções para ficar bem acomodado durante o Despertar19.</h5>
+              <h5 class="q-px-md flex flex-center lulo">Aqui você encontra as melhores opções para ficar bem acomodado durante o Despertar19.</h5>
               <div class="row">
                 <div class="col-lg-6 col-xs-12 cardhotel q-pa-lg">
                   <div inline class="bg-white">
@@ -438,7 +439,7 @@
                   <div class="column flex flex-center">
                     <q-icon name="flight" class="aviao"></q-icon>
                     <h3 class="lulobold">18% de desconto</h3>
-                    <h6 class="lulo">exclusivo nas passagens aéreas. Entre em contato com a costa family e garanta logo a sua...</h6>
+                    <p class="lulo">exclusivo nas passagens aéreas. Entre em contato com a costa family e garanta logo a sua...</p>
                   </div>
                 </q-card>
               </div>
@@ -805,7 +806,8 @@ export default {
 }
 
 .lulo {
-  font-family: lulo
+  font-family: lulo;
+  font-size: 1.5em
 }
 
 .tabelaprograma {
@@ -814,7 +816,10 @@ export default {
 }
 
 .q-tab-pane div {
-  padding: 4px;
+  padding: 2px;
   z-index: 1;
+  font-family: lulo;
+  font-size: .75em
+
 }
 </style>
