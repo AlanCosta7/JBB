@@ -1,17 +1,12 @@
 <template>
   <q-layout>
     <q-layout-header>
-      <q-toolbar color="primary" class="row fixed">
+      <q-toolbar color="tertiary" class="row fixed">
         <q-btn @click="drawer = !drawer" flat round dense icon="menu" class="q-mr-lg mobile-only"/>
         <q-toolbar-title>
           <q-btn flat dense to='/' label="Despertar 2019" class="q-pa-none despertar" />
           <div slot="subtitle" class="rio">Rio de Janeiro/RJ</div>
         </q-toolbar-title>
-        <nav class="desktop-only">
-          <q-btn flat dense label="VIP" @click.native="vip()" />
-          <q-btn flat dense label="Inscrição" @click.native="inscricao()" />
-          <q-btn flat dense label="Como chegar"  @click.native="comochegar()" />
-        </nav>
           <q-btn v-if="btnjbbtv" round size="sm" @click.native="jbbtvclick()" icon="live_tv" class="btntv q-mr-xs" />
       </q-toolbar>
     </q-layout-header>
@@ -31,6 +26,9 @@
         </q-item>
         <q-item link @click.native="vip()" v-if="!currentUser">
           <q-item-main class="text-no-wrap" label="VIP" sublabel="Restrito para inscritos" />
+        </q-item>
+        <q-item link @click.native="jornada()" v-if="currentUser">
+          <q-item-main class="text-no-wrap" label="Jornada" sublabel="Restrito para inscritos" />
         </q-item>
         <q-item link @click.native="inscricao()">
           <q-item-main class="text-no-wrap" label="Inscrição" sublabel="Já fez a sua?" />
@@ -124,6 +122,10 @@
       },
       aovivo() {
         this.$router.push('/feed')
+        this.drawer = false
+      },
+      jornada() {
+        this.$router.push('/jornada')
         this.drawer = false
       },
       programa() {

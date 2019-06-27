@@ -16,11 +16,14 @@ const routes = [
     ]
   },
   {
-    path: '/',
+    path: '/app',
     component: () => import('layouts/MyLayout.vue'),
     children: [
+      { path: '', redirect: 'inicio' },,
      // { path: 'feed', component: () => import('pages/aoVivo') },
-      { path: 'checkin', component: () => import('pages/Checkin') },
+      { path: 'inicio', name: 'inicio', component: () => import('pages/app/Inicio.vue') },
+      { path: 'jornada', name: 'jornada', component: () => import('pages/app/Jornada.vue') },
+      { path: 'checkin', name: 'checkin', component: () => import('pages/Checkin') },
       { path: 'votacao', component: () => import('pages/Votacao') },
     ]
   }
