@@ -1,9 +1,9 @@
 {
   "name": "despertar2019",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "description": "Conferência organizada pela Juventude Batista Brasileira em 2019",
   "productName": "Despertar 2019",
-  "cordovaId": "despertar19.com.br",
+  "cordovaId": "br.com.despertar19",
   "author": "Alan Costa",
   "private": true,
   "scripts": {
@@ -14,7 +14,8 @@
     "build": "quasar build --mode pwa",
     "deploy": "npm run build && npm run fb:deploy",
     "fb:deploy": "firebase deploy --only hosting",
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "echo \"No test specified\" && exit 0",
+    "cordova": "quasar build -m cordova -T android -t mat"
   },
   "dependencies": {
     "axios": "^0.18.0",
