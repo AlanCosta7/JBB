@@ -91,7 +91,8 @@ export default {
       console.log(idBoleano)
       var id = itemId in idBoleano
 
-      if (id === false) {
+      if (id
+       === false) {
         const data = {
         titulo: option,
         id: itemId
