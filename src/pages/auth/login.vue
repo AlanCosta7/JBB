@@ -3,18 +3,18 @@
     <q-layout class="flex column bg-tertiary">
       <div class="bg-tertiary cardtop">
       <div class="imagemthinking gt-m">
-        <img src="~assets/landpage/Logo_Despertar2019.png" alt="imagem" aria-hidden="true">
+        <img src="~assets/quasar-logo-full.svg" alt="imagem" aria-hidden="true">
       </div>
         <router-link to="/">
         </router-link>
       </div>
       <div class="flex flex-center">
-        <div class="flex flex-center column shadow-4 cardlogin" v-show="!currentUser">
+        <div class="flex flex-center column shadow-6 cardlogin" v-show="!currentUser">
           <h2 class="text-primary text-bold">Entre</h2>
           <p class="subtitulo">A experiência começa agora</p>
           <div id="firebaseui-auth-container"></div>
         </div>
-        <div class="flex flex-center column shadow-4 cardlogin" v-show="currentUser">
+        <div class="flex flex-center column shadow-6 cardlogin" v-show="currentUser">
           <h2 class="text-primary text-bold">Redirecionando...</h2>
           <p class="subtitulo">Você já está conectado!</p>
           <!-- <div>
@@ -60,8 +60,8 @@ export default {
         firebase.auth.FacebookAuthProvider.PROVIDER_ID
         //firebase.auth.EmailAuthProvider.PROVIDER_ID
       ],
-      tosUrl: '/legal/terms-of-service',
-      privacyPolicyUrl: '/legal/privacy',
+      //tosUrl: '/legal/terms-of-service',
+      //privacyPolicyUrl: '/legal/privacy',
       callbacks: {
         uiShown: function() {
           // The widget is rendered.
@@ -95,7 +95,7 @@ export default {
       this.$q.loading.show({ delay: 300 })
       setTimeout(() => {
         this.$q.loading.hide()
-        this.$router.replace({ name: 'checkin' })
+        this.$router.replace({ name: 'jornada' })
       }, redirectDelay)
     }
   },
@@ -110,11 +110,11 @@ export default {
 }
 </script>
 
-<style scope>
+<style scoped>
 .page-login .imagemthinking {
   position: absolute;
-  left: 1rem;
-  top: 50px;
+  left: 2.5rem;
+  top: 0px;
 }
 
 
@@ -131,8 +131,7 @@ export default {
 
 .page-login .cardlogin {
   position: relative;
-  margin-top: -100px;
-  border-radius: 2px;
+  border-radius: 5px;
   background-color: white;
   padding: 2rem 2rem;
 }

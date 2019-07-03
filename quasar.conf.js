@@ -33,9 +33,9 @@ module.exports = function (ctx) {
       }
     },
     devServer: {
-      https: true,
-      port: 8080,
-      open: true // opens browser window automatically
+      //https: true,
+      //port: 8080,
+      //open: true // opens browser window automatically
     },
     // framework: 'all' --- includes everything; for dev only!
     framework: {
@@ -93,6 +93,7 @@ module.exports = function (ctx) {
         'QCollapsible',
         'QSpinner',
         'QSpinnerBars',
+        'QSpinnerGears',
         'QSpinnerComment',
         'QProgress',
         'QActionSheet',
@@ -138,9 +139,13 @@ module.exports = function (ctx) {
     ssr: {
       pwa: false
     },
-    pwa: {
+    pwa: {  
+      workboxOptions: {
+        skipWaiting: true,
+        clientsClaim: true
+      },
       // workboxPluginMode: 'InjectManifest',
-      // workboxOptions: {},
+      // workboxOptions: {skipwaiting},
       manifest: {
         name: 'Despertar 2019',
         short_name: 'JBB2019',

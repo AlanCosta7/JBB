@@ -54,7 +54,7 @@ export default {
         type: 'negative',
         color: 'negative',
         textColor: 'white',
-        position: 'top',
+        position: 'bottom',
       })       
 
       commit('setUser', null)

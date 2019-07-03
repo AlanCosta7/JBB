@@ -15,7 +15,6 @@
       content-style="{color: 'black', padding: '20px', padding-top: '70px'}" 
       side="left" overlay="true"
       behavior="mobile"
-      breakpoint="768"
       v-model="drawer">
       <p v-if="currentUser" class="bg-primary text-white q-pa-md"><b>Usuário:</b> {{currentUser.email}}</p>
 
@@ -59,13 +58,6 @@
         </div>
       </q-modal>
       <router-view class="rota"/>
-      <div class="row fixed-bottom mobile-only">
-        <q-btn color="primary" @click="programa()" icon="home" v-if="!currentUser" class="btn col"></q-btn>
-        <q-btn color="primary" @click="checkin()" class="btn col" v-if="currentUser">Check-in</q-btn>
-        <q-btn color="primary" @click="aovivo()" class="btn col-4">Feed</q-btn>
-        <q-btn color="primary" @click="eleição()" class="btn col" v-if="currentUser">Eleição</q-btn>
-        <q-btn color="primary" @click="comochegar()" icon="room" class="btn col" v-if="!currentUser"></q-btn>
-      </div>
     </q-page-container>
   </q-layout>
 </template>
@@ -141,8 +133,8 @@
         this.drawer = false
       },
       jbbtvclick() {
-        this.$store.dispatch('assistirVideo')
         this.jbbtv = true
+        this.$store.dispatch('assistirVideo')
       },
       sairtv() {
         this.jbbtv = false
