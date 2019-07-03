@@ -1,70 +1,54 @@
 <template>
   <q-page class="bg-tertiary">
-    <div class="q-pa-md row flex items-center">
-      <template v-if="user.photoURL">
-        <img class="col-2 avatar" :src="user.photoURL" id="photoURL">
-      </template>
-        <p class="col-10 q-px-md text-white">{{user.nome}}</p>
-
-    </div>
-    <div class="q-pa-xs flex flex-center">  
-
-      <q-carousel v-model="slide" color="amber" arrows height="350px">
-        <q-carousel-slide class="flex flex-center bg-tertiary">
+    <div class="q-pa-md row flex flex-center">
+      <q-carousel v-model="slide" color="amber" arrows height="550px">
+        <q-carousel-slide class="flex flex-center bg-tertiary" v-for="(item) in jornada" :key="item.id">
           <div class="text-center">
-            <div class="column flex flex-center">
-            <img width="120" src="~assets/landpage/Logo_Despertar2019.png" alt="imagem" aria-hidden="true">
-              <p class="q-ma-xl text-white widthlulo text-weight-thin">
-                O <b>Despertar</b> começou e você já faz parte dessa história.
-                Preparamos tudo com muito carinho para você viver uma experiência marcante com a gente.
-              </p>
+            <div class="flex flex-center">
+              <div class="column">
+                <h3>{{item[0].data.dia}}</h3>
+                <p>{{item[0].data.horario}}</p>
+                <q-item tag="label">
+                  <q-item-side>
+                    <q-radio color="amber" v-model="option" :val="item[0].data.titulo1" />
+                  </q-item-side>
+                  <q-item-main>
+                    <q-item-tile class="tile text-amber" label>{{item[0].data.titulo1}}</q-item-tile>
+                    <q-item-tile class="tile text-white" sublabel>{{item[0].data.convidado1}}</q-item-tile>
+                  </q-item-main>
+                </q-item>
+                <q-item tag="label">
+                  <q-item-side>
+                    <q-radio color="amber" v-model="option" :val="item[0].data.titulo2" />
+                  </q-item-side>
+                  <q-item-main>
+                    <q-item-tile class="tile text-amber" label>{{item[0].data.titulo2}}</q-item-tile>
+                    <q-item-tile class="tile text-white" sublabel>{{item[0].data.convidado2}}</q-item-tile>
+                  </q-item-main>
+                </q-item>
+                <q-item tag="label">
+                  <q-item-side>
+                    <q-radio color="amber" v-model="option" :val="item[0].data.titulo3" />
+                  </q-item-side>
+                  <q-item-main>
+                    <q-item-tile class="tile text-amber" label>{{item[0].data.titulo3}}</q-item-tile>
+                    <q-item-tile class="tile text-white" sublabel>{{item[0].data.convidado3}}</q-item-tile>
+                  </q-item-main>
+                </q-item>
+                <q-item tag="label">
+                  <q-item-side>
+                    <q-radio color="amber" v-model="option" :val="item[0].data.titulo4" />
+                  </q-item-side>
+                  <q-item-main>
+                    <q-item-tile class="tile text-amber" label>{{item[0].data.titulo4}}</q-item-tile>
+                    <q-item-tile class="tile text-white" sublabel>{{item[0].data.convidado4}}</q-item-tile>
+                  </q-item-main>
+                </q-item>
+                <q-btn color="positive" @click="salvarJornada(option, item)" label="Salvar"></q-btn>
+              </div>
             </div>
           </div>
         </q-carousel-slide>
-
-        <q-carousel-slide class="flex flex-center bg-tertiary">
-          <div class="text-center">
-            <div class="column flex flex-center">
-            <div class="btntv3 q-mr-xs flex flex-center"><q-icon color="white" class="tv" name="live_tv"></q-icon></div>
-              <p class="q-ma-xl text-white widthlulo text-weight-thin">
-                Aqui você terá acesso as plenárias que serão transmitidas <b>ao vivo</b>.
-                Basta dar um click nesse botão bem ali no topo, no cantinho direito. 
-              </p>
-            </div>
-          </div>
-        </q-carousel-slide>
-
-        <q-carousel-slide class="flex flex-center bg-tertiary">
-          <div class="text-center">
-            <div class="column flex flex-center">
-            <img width="120" src="~assets/landpage/jornada2.png" alt="imagem" aria-hidden="true">
-              <p class="q-ma-xl text-white widthlulo text-weight-thin">
-                Durante a <b>Jornada de Conteúdo</b> você poderá registrar sua presença,
-                enviar na hora comentários, feedback e mapear toda a sua experiência no Despertar
-              </p>
-            </div>
-          </div>
-        </q-carousel-slide>
-
-        <q-carousel-slide class="flex flex-center bg-tertiary">
-          <div class="text-center">
-            <div class="column flex flex-center">
-              <h2 class="text-white text-weight-thin q-ma-xl">
-                Vamos começar!
-              </h2>
-            <q-btn color="positive" label="Iniciar"></q-btn>
-            </div>
-          </div>
-        </q-carousel-slide>
-
-        <q-carousel-control
-          slot="control-progress"
-          slot-scope="carousel"
-          position="bottom"
-          :offset="[50, 10]"
-        >
-          <q-progress :percentage="carousel.percentage" stripe color="amber" />
-        </q-carousel-control>
       </q-carousel>
     </div>
   </q-page>
@@ -77,15 +61,50 @@ export default {
   name: "iniciopage",
   data() {
     return {
-      slide: 0
+      slide: 0,
+      option: null
     };
   },
   computed: {
     ...mapGetters({
+      jornada: "jornada/jornada",
+      listaMaps: "jornada/listaMaps",
       loading: "loading",
       error: "error",
       user: "currentUser"
-    })
+    }),
+  },
+  async mounted() {
+    await this.$store.dispatch('jornada/watchJornada')
+    await this.$store.dispatch('jornada/loadMaps')
+  },
+  methods: {
+    salvarJornada(option, item) {
+      var itemId = item[0].id
+      var listaMaps = this.listaMaps
+      var idBoleano
+      for (let i = 0; i < listaMaps.length; i++) {
+        var element = listaMaps[i].data.id
+        idBoleano.push(element)
+      }
+
+      console.log(idBoleano)
+      var id = itemId in idBoleano
+
+      if (id === false) {
+        const data = {
+        titulo: option,
+        id: itemId
+      }
+      //console.log(item[0].id)
+      //this.$store.dispatch('jornada/salvaJornada', {data})
+      } else {
+      console.log('já foi add')
+
+      }
+
+      
+    }
   }
 };
 </script>
@@ -126,5 +145,9 @@ export default {
 .tv{
     font-size: 3em;
     text-align: center
+}
+
+.tile {
+  font-size: 0.75em
 }
 </style>

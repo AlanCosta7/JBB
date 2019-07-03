@@ -2,8 +2,8 @@
   <q-page class="page-login">
     <q-layout class="flex column bg-tertiary">
       <div class="bg-tertiary cardtop">
-      <div class="imagemthinking gt-m">
-        <img src="~assets/quasar-logo-full.svg" alt="imagem" aria-hidden="true">
+      <div class="flex flex-left gt-m">
+        <img width="150px" src="~assets/landpage/Logo_Despertar2019.png" alt="imagem" aria-hidden="true">
       </div>
         <router-link to="/">
         </router-link>
@@ -95,7 +95,7 @@ export default {
       this.$q.loading.show({ delay: 300 })
       setTimeout(() => {
         this.$q.loading.hide()
-        this.$router.replace({ name: 'jornada' })
+        this.$router.replace({ name: 'inicio' })
       }, redirectDelay)
     }
   },
@@ -111,13 +111,6 @@ export default {
 </script>
 
 <style scoped>
-.page-login .imagemthinking {
-  position: absolute;
-  left: 2.5rem;
-  top: 0px;
-}
-
-
 .page-login .cardtop {
   width: 100%;
   height: 200px;

@@ -1,12 +1,19 @@
 <template>
   <q-page class="bg-tertiary">
-    <div class="column q-pa-xs flex flex-center">
-      <template v-if="user.photoURL">
-        <img class="avatar" :src="user.photoURL" id="photoURL">
-      </template>
-      <h6 class="q-mt-xl text-white lulo">Olá! {{user.nome}}</h6>
+        <div class="q-pa-md row flex items-center">
 
-      <q-carousel v-model="slide" color="amber" arrows height="350px">
+      <q-carousel v-model="slide" color="amber" arrows height="500px">
+        <q-carousel-slide class="flex flex-center bg-tertiary">
+          <div class="text-center">
+            <div class="column flex flex-center">
+              <div v-if="user.photoURL">
+                <img class="avatar" :src="user.photoURL" id="photoURL">
+              </div>              
+                <h6 class="q-mt-xl text-white lulo">Olá! {{user.nome}}</h6>
+            </div>
+          </div>
+        </q-carousel-slide>
+
         <q-carousel-slide class="flex flex-center bg-tertiary">
           <div class="text-center">
             <div class="column flex flex-center">
@@ -34,7 +41,7 @@
         <q-carousel-slide class="flex flex-center bg-tertiary">
           <div class="text-center">
             <div class="column flex flex-center">
-            <img width="120" src="~assets/landpage/jornada2.png" alt="imagem" aria-hidden="true">
+            <img width="80" src="~assets/landpage/jornada2.png" alt="imagem" aria-hidden="true">
               <p class="q-ma-xl text-white widthlulo text-weight-thin">
                 Durante a <b>Jornada de Conteúdo</b> você poderá registrar sua presença,
                 enviar na hora comentários, feedback e mapear toda a sua experiência no Despertar
@@ -110,18 +117,23 @@ export default {
 
 .widthlulo {
   width: 60%;
-  font-size: 1.25em;
+  font-size: 1em;
 }
 
 .btntv3 {
   background-image: linear-gradient(red, yellow);
   border-radius: 100%;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
 }
 
 .tv{
-    font-size: 3em;
+    font-size: 2em;
     text-align: center
+}
+
+#photoURL{
+  width: 80px;
+  height: 80px;
 }
 </style>

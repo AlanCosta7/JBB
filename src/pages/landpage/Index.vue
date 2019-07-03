@@ -21,7 +21,7 @@
       </nav>
       <q-btn round size="sm" @click.native="jbbtvclick()" icon="live_tv" class="btntv q-mr-xs" />
     </q-toolbar>
-    <q-layout-drawer ref="menuDrawer" content-class="bg-neutral z-top" side="left" behavior="mobile">
+    <q-layout-drawer ref="menuDrawer" content-class="bg-neutral z-max" side="left" behavior="mobile">
       <p v-if="currentUser" class="bg-primary text-white q-pa-md">
         <b>Usuário:</b>
         {{currentUser.email}}
@@ -29,9 +29,6 @@
 
       <!-- Lista de menu -->
       <template>
-        <q-item link @click.native="programa()">
-          <q-item-main class="text-no-wrap" label="Home" sublabel="Página principal" />
-        </q-item>
         <q-item link @click.native="vip()" v-if="!currentUser">
           <q-item-main class="text-no-wrap" label="VIP" sublabel="Restrito para inscritos" />
         </q-item>
@@ -678,7 +675,6 @@ export default {
   data() {
     return {
       jbbtv: false,
-      drawer: false,
       opened: false,
       openedinscri: false,
       openedmap: false,

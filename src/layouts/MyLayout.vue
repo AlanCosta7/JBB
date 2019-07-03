@@ -2,7 +2,7 @@
   <q-layout>
     <q-layout-header>
       <q-toolbar color="tertiary" class="row fixed">
-        <q-btn @click="drawer = !drawer" flat round dense icon="menu" class="q-mr-lg mobile-only"/>
+        <q-btn @click="toggleMenu()" flat round dense icon="menu" class="q-mr-lg" />
         <q-toolbar-title>
           <q-btn flat dense to='/' label="Despertar 2019" class="q-pa-none despertar" />
           <div slot="subtitle" class="rio">Rio de Janeiro/RJ</div>
@@ -15,14 +15,11 @@
       content-style="{color: 'black', padding: '20px', padding-top: '70px'}" 
       side="left" overlay="true"
       behavior="mobile"
-      v-model="drawer">
+      ref="menuDrawer" >
       <p v-if="currentUser" class="bg-primary text-white q-pa-md"><b>Usuário:</b> {{currentUser.email}}</p>
 
       <!-- Lista de menu -->
       <template>
-        <q-item link @click.native="programa()">
-          <q-item-main class="text-no-wrap" label="Home" sublabel="Página principal" />
-        </q-item>
         <q-item link @click.native="vip()" v-if="!currentUser">
           <q-item-main class="text-no-wrap" label="VIP" sublabel="Restrito para inscritos" />
         </q-item>
@@ -71,8 +68,7 @@
     data() {
       return {
         jbbtv: false,
-        btnjbbtv: true,
-        drawer: false
+        btnjbbtv: true
       }
     },
     computed: {
@@ -81,18 +77,18 @@
         error: 'error',
         user: 'user',
         currentUser: 'currentUser',
-        video: 'video'
+        video: 'video',
       }),
     },
-    created() {
-      this.$store.dispatch('minhaposicao')
-    },
-    async mounted() {
-      this.loading = true
-      await this.$store.dispatch('carregaTimeLine')
-      this.loading = false
-    },
     methods: {
+    toggleMenu() {
+      const $menuDrawer = this.$refs.menuDrawer;
+      if ($menuDrawer.showing) {
+        $menuDrawer.hide();
+      } else {
+        $menuDrawer.show();
+      }
+    },
       participa () {
         const ele = document.getElementById('participa') // You need to get your element here
         const target = getScrollTarget(ele)
@@ -112,16 +108,8 @@
         this.$router.push('/inscricao')
         this.drawer = false
       },
-      aovivo() {
-        this.$router.push('/feed')
-        this.drawer = false
-      },
       jornada() {
         this.$router.push('/jornada')
-        this.drawer = false
-      },
-      programa() {
-        this.$router.push('/')
         this.drawer = false
       },
       checkin() {
