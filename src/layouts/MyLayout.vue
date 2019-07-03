@@ -1,17 +1,12 @@
 <template>
   <q-layout>
     <q-layout-header>
-      <q-toolbar color="primary" class="row fixed">
+      <q-toolbar color="tertiary" class="row fixed">
         <q-btn @click="drawer = !drawer" flat round dense icon="menu" class="q-mr-lg mobile-only"/>
         <q-toolbar-title>
           <q-btn flat dense to='/' label="Despertar 2019" class="q-pa-none despertar" />
           <div slot="subtitle" class="rio">Rio de Janeiro/RJ</div>
         </q-toolbar-title>
-        <nav class="desktop-only">
-          <q-btn flat dense label="VIP" @click.native="vip()" />
-          <q-btn flat dense label="Inscrição" @click.native="inscricao()" />
-          <q-btn flat dense label="Como chegar"  @click.native="comochegar()" />
-        </nav>
           <q-btn v-if="btnjbbtv" round size="sm" @click.native="jbbtvclick()" icon="live_tv" class="btntv q-mr-xs" />
       </q-toolbar>
     </q-layout-header>
@@ -20,7 +15,6 @@
       content-style="{color: 'black', padding: '20px', padding-top: '70px'}" 
       side="left" overlay="true"
       behavior="mobile"
-      breakpoint="768"
       v-model="drawer">
       <p v-if="currentUser" class="bg-primary text-white q-pa-md"><b>Usuário:</b> {{currentUser.email}}</p>
 
@@ -31,6 +25,9 @@
         </q-item>
         <q-item link @click.native="vip()" v-if="!currentUser">
           <q-item-main class="text-no-wrap" label="VIP" sublabel="Restrito para inscritos" />
+        </q-item>
+        <q-item link @click.native="jornada()" v-if="currentUser">
+          <q-item-main class="text-no-wrap" label="Jornada" sublabel="Restrito para inscritos" />
         </q-item>
         <q-item link @click.native="inscricao()">
           <q-item-main class="text-no-wrap" label="Inscrição" sublabel="Já fez a sua?" />
@@ -61,13 +58,6 @@
         </div>
       </q-modal>
       <router-view class="rota"/>
-      <div class="row fixed-bottom mobile-only">
-        <q-btn color="primary" @click="programa()" icon="home" v-if="!currentUser" class="btn col"></q-btn>
-        <q-btn color="primary" @click="checkin()" class="btn col" v-if="currentUser">Check-in</q-btn>
-        <q-btn color="primary" @click="aovivo()" class="btn col-4">Feed</q-btn>
-        <q-btn color="primary" @click="eleição()" class="btn col" v-if="currentUser">Eleição</q-btn>
-        <q-btn color="primary" @click="comochegar()" icon="room" class="btn col" v-if="!currentUser"></q-btn>
-      </div>
     </q-page-container>
   </q-layout>
 </template>
@@ -126,6 +116,10 @@
         this.$router.push('/feed')
         this.drawer = false
       },
+      jornada() {
+        this.$router.push('/jornada')
+        this.drawer = false
+      },
       programa() {
         this.$router.push('/')
         this.drawer = false
@@ -139,8 +133,8 @@
         this.drawer = false
       },
       jbbtvclick() {
-        this.$store.dispatch('assistirVideo')
         this.jbbtv = true
+        this.$store.dispatch('assistirVideo')
       },
       sairtv() {
         this.jbbtv = false
