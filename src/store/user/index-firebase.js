@@ -7,20 +7,17 @@ import { pick } from 'lodash-es'
 export default {
   namespaced: false,
   state: { 
-    cpf: [],
+    inscrito: false,
     currentUser: null, 
     currentCadastrado: null,   
     loading: false,
   },
   getters: {
-    inscrito(state, getters){
-      return getters.cpf.filter(c => c.cpf === getters.currentCadastrado)
+    inscrito(state){
+      return state.inscrito
     },
     loading(state) {
       return state.loading
-    },
-    cpf(state) {
-      return state.cpf
     },
     currentUser(state) {
       return state.currentUser
@@ -33,8 +30,8 @@ export default {
     }
   },
   mutations: {
-    setCpf (state, payload) {
-      state.cpf = payload
+    setInscrito (state, payload) {
+      state.inscrito = payload
     },
     startLoading (state) {
       state.loading = true
@@ -48,7 +45,6 @@ export default {
     },
     setUserCadastrado(state, payload) {
       state.currentCadastrado = payload
-      LocalStorage.set('cadastro', JSON.stringify(payload))
     }
   },
   actions: {
@@ -90,15 +86,21 @@ export default {
           console.error('Erro ao tentar carregar "cadastro"', err)
         })
         .then(mapQuerySnapshot)
+        //console.log(cards)
+        if (cards.length > 0) {
+          let meuCard = cards[0].data.cpf
+          console.log(meuCard)
 
-        commit('setUserCadastrado', cards)
+          commit('setUserCadastrado', meuCard)
+        }
         
       commit('stopLoading')
     },
 
-    async loadCpf ({ commit }, state) {
+    async loadCpf ({ commit, getters }) {
       commit('startLoading')
-    
+      let currentCadastrado = getters.currentCadastrado
+
       const cpf = await $firestore
         .collection('inscritos')
         .get()
@@ -106,7 +108,17 @@ export default {
           console.error('Erro ao tentar carregar "cadastro"', err)
         })
         .then(mapQuerySnapshot)
-      commit('setCpf', cpf)
+
+        for (let i = 0; i < cpf.length; i++) {
+          const element = cpf[i].data.cpf
+          if (element === currentCadastrado) {
+            
+          var meuCpf = true
+          }
+
+          commit('setInscrito', meuCpf)
+        }
+
       commit('stopLoading')
     },
     

@@ -108,8 +108,8 @@ export default {
     this.$q.loading.show()
     await this.$store.dispatch('loadCadastro')
     this.$q.loading.hide()
-
-     if (this.currentCadastrado) {
+    console.log(this.currentCadastrado)
+     if (this.currentCadastrado.length > 0) {
       const rediretDelay = 2000;
       this.redirectToApp(rediretDelay);
       return;
@@ -134,7 +134,9 @@ export default {
           promiseFn: () => this.$store.dispatch('salvaCadastro', {data}),
           messageSuccess: 'Cadastro realizado com sucesso',
           messageError: 'Erro ao realizar cadastro'
-        })
+        }).then(
+          this.$router.replace({ name: "inicio" })
+        )
     },
     getApiInformations() {
       const cep = this.cep;

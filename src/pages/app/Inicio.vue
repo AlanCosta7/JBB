@@ -134,8 +134,13 @@ export default {
         p9: jornada[8],
       }
       //console.log(data)
+      if (this.inscrito) {
       this.$store.dispatch('jornada/addJornada', {data})
       this.$router.replace({ name: 'jornada' })
+      } else {
+        this.$q.notify({ message: 'Você não está inscrito. Entre em contato conosco.', type: 'negative', timeout: 1500 })
+
+      }
 
     }
   }

@@ -29,19 +29,19 @@
         <q-item link @click.native="vip()"  v-if="!currentUser">
           <q-item-main class="text-no-wrap" label="VIP" sublabel="Restrito para inscritos" />
         </q-item>
-        <q-item link @click.native="jornada()" v-if="currentUser">
+        <q-item link @click.native="jornada()" v-if="currentUser  && inscrito">
           <q-item-main class="text-no-wrap" label="Jornada" sublabel="Programe sua jornada de conteúdo" />
         </q-item>
-        <q-item link @click.native="inscricao()"  v-if="!currentUser">
+        <q-item link @click.native="inscricao()"  v-if="!inscrito">
           <q-item-main class="text-no-wrap" label="Inscrição" sublabel="Já fez a sua?" />
         </q-item>
         <q-item link @click.native="comochegar()">
           <q-item-main class="text-no-wrap" label="Como chegar?" sublabel="Pra você não fica perdido" />
         </q-item>
-        <q-item link @click.native="checkin()" v-if="currentUser">
+        <q-item link @click.native="checkin()" v-if="currentUser && inscrito">
             <q-item-main class="text-no-wrap" label="Checkin" sublabel="Registre sua presença" />
           </q-item>
-        <q-item link @click.native="eleição()" v-if="currentUser">
+        <q-item link @click.native="eleição()" v-if="currentUser && inscrito">
             <q-item-main class="text-no-wrap" label="Eleição" sublabel="Escolha seu representante" />
           </q-item>
         <q-item link @click.native="sair()" v-if="currentUser" class="bg-negative text-white">
@@ -71,6 +71,21 @@
       <q-btn class="mobile-only" color="negative" label="Cancelar" @click="openedmap = false"></q-btn>
     </q-modal>
 
+    
+    <!-- Modal Inscrição -->
+    <q-modal v-model="openedinscri">
+      <q-modal-layout>
+        <q-toolbar slot="header">
+          <q-toolbar-title>Inscrição</q-toolbar-title>
+        </q-toolbar>
+        <iframe
+          class="modelInscricao"
+          src="https://www.pallua.com.br/captacao/projeto/evento_despertar_2019"
+        ></iframe>
+        <q-btn class="mobile-only" color="negative" label="Cancelar" @click="openedinscri = false"></q-btn>
+      </q-modal-layout>
+    </q-modal>
+
   </q-layout>
 </template>
 
@@ -82,6 +97,7 @@
     name: 'MyLayout',
     data() {
       return {
+        openedinscri: false,
         openedmap: false,
         jbbtv: false,
         btnjbbtv: true
@@ -89,6 +105,7 @@
     },
     computed: {
       ...mapGetters({
+        inscrito: 'inscrito',
         loading: 'loading',
         error: 'error',
         user: 'user',
@@ -128,7 +145,7 @@
         $menuDrawer.hide();
       },
       inscricao() {
-        this.$router.push('/inscricao')
+        this.openedinscri = true
       const $menuDrawer = this.$refs.menuDrawer;
         $menuDrawer.hide();
       },
@@ -208,5 +225,12 @@
     height: 750px;
     max-width: 100%;
     max-height: 90%;
+}
+
+.modelInscricao {
+  width: 850px;
+  height: 750px;
+  max-width: 100%;
+  max-height: 90%;
 }
 </style>
