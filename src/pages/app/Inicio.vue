@@ -56,7 +56,7 @@
               <h2 class="text-white text-weight-thin q-ma-xl">
                 Vamos começar!
               </h2>
-            <q-btn color="positive" label="Iniciar" to="/app/jornada"></q-btn>
+            <q-btn color="positive" label="Iniciar" @click="iniciar()"></q-btn>
             </div>
           </div>
         </q-carousel-slide>
@@ -86,10 +86,58 @@ export default {
   },
   computed: {
     ...mapGetters({
+      inscrito: 'inscrito',
+      jornada: "jornada/jornada",
+      listaMaps: "jornada/listaMaps",
       loading: "loading",
       error: "error",
       user: "currentUser"
     })
+  },
+  async mounted() {
+    this.$q.loading.show()
+    await this.$store.dispatch('loadCadastro')
+    await this.$store.dispatch('jornada/watchJornada')
+    await this.$store.dispatch('jornada/loadMaps')    
+    await this.$store.dispatch('loadCpf')
+    this.$q.loading.hide()
+          
+    console.log(this.inscrito)
+
+
+    if (this.listaMaps == true) {
+      const rediretDelay = 2000
+      this.redirectToApp(rediretDelay)
+      return
+    }
+
+  },
+  methods: {
+    redirectToApp(redirectDelay) {
+      this.$q.loading.show({ delay: 300 })
+      setTimeout(() => {
+        this.$q.loading.hide()
+        this.$router.replace({ name: 'jornada' })
+      }, redirectDelay)
+    },
+    iniciar() {
+      var jornada = this.jornada
+      var data = {
+        p1: jornada[0],
+        p2: jornada[1],
+        p3: jornada[2],
+        p4: jornada[3],
+        p5: jornada[4],
+        p6: jornada[5],
+        p7: jornada[6],
+        p8: jornada[7],
+        p9: jornada[8],
+      }
+      //console.log(data)
+      this.$store.dispatch('jornada/addJornada', {data})
+      this.$router.replace({ name: 'jornada' })
+
+    }
   }
 };
 </script>
@@ -111,7 +159,6 @@ export default {
 }
 
 .lulo {
-  font-family: lulo;
   text-align: center;
 }
 
@@ -133,7 +180,7 @@ export default {
 }
 
 #photoURL{
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
 }
 </style>

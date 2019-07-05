@@ -1,12 +1,12 @@
 <template>
   <q-page class="flex flex-center column">
-    <div class="bg-secondary absolute-top items-center q-pt-xl column" style="height: 300px">
+    <div class="bg-tertiary absolute-top items-center divHero column" style="height: 300px">
       <template v-if="user.photoURL">
         <img class="avatar" :src="user.photoURL" id="photoURL">
       </template>
-      <p class="q-mt-xl"><b>{{user.email}}</b></p>
+      <p class="q-mt-md"><b>{{user.email}}</b></p>
     </div>
-    <q-card class="bg-white flex flex-center z-top" style="height: 200px; width: 200px">
+    <q-card class="bg-white flex flex-center zindex" style="height: 200px; width: 200px">
       <qrcode-vue :value="value"></qrcode-vue>
     </q-card>
     <p class="chave">chave: {{user.uid}}</p>
@@ -21,7 +21,7 @@
     name: 'qrcodepage',
     data() {
       return {
-        size: 300
+        size: 900
       }
     },
     components: {
@@ -56,5 +56,13 @@
   .chave {
     position: absolute;
     bottom: 10%
+  }
+
+  .divHero {
+    padding-top: 60px
+  }
+
+  .zindex{
+    z-index: 100;
   }
 </style>

@@ -29,7 +29,7 @@
 
       <!-- Lista de menu -->
       <template>
-        <q-item link @click.native="vip()" v-if="!currentUser">
+        <q-item link @click.native="vip()">
           <q-item-main class="text-no-wrap" label="VIP" sublabel="Restrito para inscritos" />
         </q-item>
         <q-item link @click.native="inscricao()">
@@ -644,7 +644,7 @@
       </q-modal-layout>
     </q-modal>
 
-    <!-- Modal Maps Mobile-->
+    <!-- Modal Maps -->
     <q-modal v-model="openedmap">
       <iframe
         src="https://www.google.com/maps/d/u/0/embed?mid=1ALnS8JLUtWxOfq5C8E2m15NY-RhCquBt"

@@ -2,16 +2,25 @@
   <q-page class="page-login">
     <q-layout class="flex column bg-tertiary">
       <div class="bg-tertiary cardtop">
-      <div class="flex flex-left gt-m">
-        <img width="150px" src="~assets/landpage/Logo_Despertar2019.png" alt="imagem" aria-hidden="true">
-      </div>
-        <router-link to="/">
-        </router-link>
+        <div class="flex flex-left gt-m">
+          <img
+            width="150px"
+            src="~assets/landpage/Logo_Despertar2019.png"
+            alt="imagem"
+            aria-hidden="true"
+          />
+        </div>
+        <router-link to="/"></router-link>
       </div>
       <div class="flex flex-center">
         <div class="flex flex-center column shadow-6 cardlogin" v-show="!currentUser">
           <h2 class="text-primary text-bold">Entre</h2>
-          <p class="subtitulo">A experiência começa agora</p>
+          <p class="subtitulo lulo">
+            A experiência do
+            <br />
+            <b>Despertar 19</b>
+            <br />começa agora
+          </p>
           <div id="firebaseui-auth-container"></div>
         </div>
         <div class="flex flex-center column shadow-6 cardlogin" v-show="currentUser">
@@ -29,26 +38,26 @@
 </template>
 
 <script>
-import Vuex from 'vuex'
-import { firebase } from '../../plugins/firebase.js'
+import Vuex from "vuex";
+import { firebase } from "../../plugins/firebase.js";
 
 export default {
-  name: 'PageLogin',
-  meta: { title: 'garage thinking - Login' },
+  name: "PageLogin",
+  meta: { title: "garage thinking - Login" },
   data() {
-    return {}
+    return {};
   },
-  mounted() {
+  async mounted() {
     if (this.currentUser) {
-      const rediretDelay = 2000
-      this.redirectToApp(rediretDelay)
-      return
+      const rediretDelay = 2000;
+      this.redirectToApp(rediretDelay);
+      return;
     }
     // Confgiure and add the FirebaseUI Widget
-    let signInFlow = 'popup'
+    let signInFlow = "popup";
     // For iOS full screen apps we use the redirect auth mode.
-    if ('standalone' in window.navigator && window.navigator.standalone) {
-      signInFlow = 'redirect'
+    if ("standalone" in window.navigator && window.navigator.standalone) {
+      signInFlow = "redirect";
     }
 
     const uiConfig = {
@@ -67,47 +76,51 @@ export default {
           // The widget is rendered.
 
           // Update text content of buttons
-          updateLabels()
+          updateLabels();
           function updateLabels() {
-            const elGoogle = document.querySelector('.firebaseui-idp-google .firebaseui-idp-text-long')
-            const elFacebook = document.querySelector('.firebaseui-idp-facebook .firebaseui-idp-text-long')
+            const elGoogle = document.querySelector(
+              ".firebaseui-idp-google .firebaseui-idp-text-long"
+            );
+            const elFacebook = document.querySelector(
+              ".firebaseui-idp-facebook .firebaseui-idp-text-long"
+            );
             // const elEmail = document.querySelector('.firebaseui-idp-password .firebaseui-idp-text-long')
-            const elementsExists = elGoogle && elFacebook /* && elEmail */
+            const elementsExists = elGoogle && elFacebook; /* && elEmail */
             if (!elementsExists) {
-              window.requestAnimationFrame(updateLabels)
+              window.requestAnimationFrame(updateLabels);
             } else {
-              elGoogle.textContent = 'Acessar com Google'
-              elFacebook.textContent = 'Acessar com Facebook'
+              elGoogle.textContent = "Acessar com Google";
+              elFacebook.textContent = "Acessar com Facebook";
               // elEmail.textContent = 'Acessar com Email'
             }
           }
         }
       }
-    }
-    this.$firebaseui.start('#firebaseui-auth-container', uiConfig)
+    };
+    this.$firebaseui.start("#firebaseui-auth-container", uiConfig);
   },
   computed: {
-    ...Vuex.mapGetters(['currentUser'])
+    ...Vuex.mapGetters(["currentUser"])
   },
   methods: {
-    ...Vuex.mapActions(['logout']),
+    ...Vuex.mapActions(["logout"]),
     redirectToApp(redirectDelay) {
-      this.$q.loading.show({ delay: 300 })
+      this.$q.loading.show({ delay: 300 });
       setTimeout(() => {
-        this.$q.loading.hide()
-        this.$router.replace({ name: 'inicio' })
-      }, redirectDelay)
+        this.$q.loading.hide();
+        this.$router.replace({ name: "cadastro" });
+      }, redirectDelay);
     }
   },
   watch: {
     currentUser(newUser, oldUser) {
       if (newUser) {
         // user is logged, so... lets redirect to App
-        this.redirectToApp(1000)
+        this.redirectToApp(1000);
       }
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -149,20 +162,13 @@ export default {
 }
 
 .page-login h2 {
-  font-size: 28px;
-  font-weight: 300;
+  font-size: 2em;
+  font-weight: 400;
   margin: 0;
-  padding: 0;
+  padding: 10px;
 }
 
 @media only screen and (max-width: 480px) {
-  .page-login h1 {
-    font-size: 10vw;
-  }
-  .page-login h2 {
-    font-size: 10vw;
-  }
-
   .page-login .q-layout-footer .q-btn {
     display: block;
   }

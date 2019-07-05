@@ -218,7 +218,7 @@
       
 <script>
 import { uid, filter } from 'quasar'
-import { $db, $storage } from '../plugins/firebase'
+import { $db, $storage } from '../../plugins/firebase'
 import { mapGetters } from 'vuex'
 import Vuex from 'vuex'
 

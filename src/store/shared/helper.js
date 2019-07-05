@@ -40,15 +40,43 @@ export function mapDocumentSnapshot(docSnapshot) {
   }
 }
 
-export async function addDoc(uid, newCard) {
+export async function addDoc(uid, jornada) {
+  console.log(jornada)
 
   const docRef = await $firestore
     .collection('usuario')
     .doc(uid)
     .collection('map')
-    .add(newCard)
-
+    .add(jornada) 
 
   console.info('Doc adicionado:', docRef)
   return docRef
+}
+
+export async function addCadastro(uid, newCard) {
+  console.log(newCard)
+
+  const docRef = await $firestore
+    .collection('usuario')
+    .doc(uid)
+    .collection('cadastro')
+    .add(newCard) 
+
+  console.info('Doc adicionado:', docRef)
+  return docRef
+}
+
+export async function updateDoc(pid, collectionName, docId, docData) {
+  assert(pid, 'projectId')
+
+  const documentRef = $firestore
+    .collection('projects')
+    .doc(pid)
+    .collection(collectionName)
+    .doc(docId)
+
+  await documentRef.update(docData)
+  console.info('Doc atualizado:', docId)
+
+  return documentRef
 }

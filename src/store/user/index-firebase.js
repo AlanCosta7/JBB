@@ -1,22 +1,54 @@
 import { LocalStorage } from 'quasar'
-import { $auth } from '../../plugins/firebase'
+import { $auth, $firestore } from '../../plugins/firebase'
 import { Notify } from 'quasar'
+import { assert, mapQuerySnapshot, getCommonsIds, addDoc, addCadastro } from '../shared/helper'
+import { pick } from 'lodash-es'
 
 export default {
   namespaced: false,
-  state: { currentUser: null },
+  state: { 
+    cpf: [],
+    currentUser: null, 
+    currentCadastrado: null,   
+    loading: false,
+  },
   getters: {
+    inscrito(state, getters){
+      return getters.cpf.filter(c => c.cpf === getters.currentCadastrado)
+    },
+    loading(state) {
+      return state.loading
+    },
+    cpf(state) {
+      return state.cpf
+    },
     currentUser(state) {
       return state.currentUser
+    },
+    currentCadastrado(state) {
+      return state.currentCadastrado
     },
     isAuthenticated(state) {
       return !!state.currentUser
     }
   },
   mutations: {
+    setCpf (state, payload) {
+      state.cpf = payload
+    },
+    startLoading (state) {
+      state.loading = true
+    },
+    stopLoading (state) {
+      state.loading = false
+    },
     setUser(state, payload) {
       state.currentUser = payload
       LocalStorage.set('user', JSON.stringify(payload))
+    },
+    setUserCadastrado(state, payload) {
+      state.currentCadastrado = payload
+      LocalStorage.set('cadastro', JSON.stringify(payload))
     }
   },
   actions: {
@@ -29,6 +61,55 @@ export default {
         .then(user => handleSuccess(commit, user))
         .catch(error => handleError(commit, error))
     },
+
+    
+    async salvaCadastro ({rootState, commit}, {data}) {
+      const validKeys = ['cpf', 'cidade', 'uf', 'bairro', 'logradouro', 'cep']
+      const newCard = pick(data, validKeys)
+      //console.log(newCard)
+
+      const {uid} = getCommonsIds({ rootState })
+      assert(uid, 'projectId')
+
+      const docRef = await addCadastro(uid, newCard)
+      return docRef.id
+
+    },
+
+    async loadCadastro ({ rootState, commit }) {
+      const { uid } = getCommonsIds({ rootState })
+      assert(uid, 'projectId')
+      commit('startLoading')
+    
+      const cards = await $firestore
+        .collection('usuario')
+        .doc(uid)
+        .collection('cadastro')
+        .get()
+        .catch(err => {
+          console.error('Erro ao tentar carregar "cadastro"', err)
+        })
+        .then(mapQuerySnapshot)
+
+        commit('setUserCadastrado', cards)
+        
+      commit('stopLoading')
+    },
+
+    async loadCpf ({ commit }, state) {
+      commit('startLoading')
+    
+      const cpf = await $firestore
+        .collection('inscritos')
+        .get()
+        .catch(err => {
+          console.error('Erro ao tentar carregar "cadastro"', err)
+        })
+        .then(mapQuerySnapshot)
+      commit('setCpf', cpf)
+      commit('stopLoading')
+    },
+    
 
     signInWithRedirect({ commit }, { provider }) {
       commit('setLoading', true)

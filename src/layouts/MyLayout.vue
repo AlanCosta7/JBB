@@ -16,17 +16,23 @@
       side="left" overlay="true"
       behavior="mobile"
       ref="menuDrawer" >
-      <p v-if="currentUser" class="bg-primary text-white q-pa-md"><b>Usuário:</b> {{currentUser.email}}</p>
+              <div v-if="currentUser.photoURL" class="bg-primary row q-pa-md full-width flex items-center">
+                <img class="avatar" :src="currentUser.photoURL" >
+                <p class="text-white q-pl-md q-pt-md">{{currentUser.nome}}</p>
+              </div>   
 
       <!-- Lista de menu -->
       <template>
-        <q-item link @click.native="vip()" v-if="!currentUser">
+        <q-item link @click.native="inicio()"  v-if="currentUser">
+          <q-item-main class="text-no-wrap" label="Inicio" sublabel="Boas vindas!" />
+        </q-item>
+        <q-item link @click.native="vip()"  v-if="!currentUser">
           <q-item-main class="text-no-wrap" label="VIP" sublabel="Restrito para inscritos" />
         </q-item>
         <q-item link @click.native="jornada()" v-if="currentUser">
-          <q-item-main class="text-no-wrap" label="Jornada" sublabel="Restrito para inscritos" />
+          <q-item-main class="text-no-wrap" label="Jornada" sublabel="Programe sua jornada de conteúdo" />
         </q-item>
-        <q-item link @click.native="inscricao()">
+        <q-item link @click.native="inscricao()"  v-if="!currentUser">
           <q-item-main class="text-no-wrap" label="Inscrição" sublabel="Já fez a sua?" />
         </q-item>
         <q-item link @click.native="comochegar()">
@@ -56,6 +62,15 @@
       </q-modal>
       <router-view class="rota"/>
     </q-page-container>
+        <!-- Modal Maps -->
+    <q-modal v-model="openedmap">
+      <iframe
+        src="https://www.google.com/maps/d/u/0/embed?mid=1ALnS8JLUtWxOfq5C8E2m15NY-RhCquBt"
+        class="modelMaps"
+      ></iframe>
+      <q-btn class="mobile-only" color="negative" label="Cancelar" @click="openedmap = false"></q-btn>
+    </q-modal>
+
   </q-layout>
 </template>
 
@@ -67,6 +82,7 @@
     name: 'MyLayout',
     data() {
       return {
+        openedmap: false,
         jbbtv: false,
         btnjbbtv: true
       }
@@ -96,29 +112,40 @@
         const duration = 1000
         setScrollPosition(target, offset, duration)
       },
+      inicio() {
+        this.$router.push('/app/inicio')
+      const $menuDrawer = this.$refs.menuDrawer;
+        $menuDrawer.hide();
+      },
       vip() {
         this.$router.push('/login')
-        this.drawer = false
+      const $menuDrawer = this.$refs.menuDrawer;
+        $menuDrawer.hide();
       },
       eleição() {
-        this.$router.push('/votacao')
-        this.drawer = false
+        this.$router.push('/app/votacao')
+      const $menuDrawer = this.$refs.menuDrawer;
+        $menuDrawer.hide();
       },
       inscricao() {
         this.$router.push('/inscricao')
-        this.drawer = false
+      const $menuDrawer = this.$refs.menuDrawer;
+        $menuDrawer.hide();
       },
       jornada() {
-        this.$router.push('/jornada')
-        this.drawer = false
+        this.$router.push('/app/jornada')
+      const $menuDrawer = this.$refs.menuDrawer;
+        $menuDrawer.hide();
       },
       checkin() {
-        this.$router.push('/checkin')
-        this.drawer = false
+        this.$router.push('/app/checkin')
+      const $menuDrawer = this.$refs.menuDrawer;
+        $menuDrawer.hide();
       },
-      comochegar() {
-        this.$router.push('/comochegar')
-        this.drawer = false
+      comochegar() {        
+      this.openedmap = true;
+      const $menuDrawer = this.$refs.menuDrawer;
+        $menuDrawer.hide();
       },
       jbbtvclick() {
         this.jbbtv = true
@@ -175,4 +202,11 @@
     z-index: 0;
     margin-top: 60px
   }
+
+  .modelMaps {
+    width: 850px;
+    height: 750px;
+    max-width: 100%;
+    max-height: 90%;
+}
 </style>
