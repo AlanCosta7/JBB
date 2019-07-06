@@ -41,7 +41,7 @@
                     <q-item-tile class="tile left text-black lulo" label>{{item.data.resposta4}}</q-item-tile>
                   </q-item-main>
                 </q-item>
-                <q-btn color="positive" @click="salvarResposta()" label="Salvar"></q-btn>
+                <q-btn color="positive" @click="salvarResposta(item)" label="Salvar"></q-btn>
               </div>
             </div>
           </div>
@@ -58,7 +58,9 @@ export default {
   name: "PageQuiz",
   meta: { title: "Despertar 2019 - Quiz" },
   data() {
-    return {};
+    return {
+      pontos: 0  
+    };
   },
   computed: {
     ...mapGetters({
@@ -66,16 +68,26 @@ export default {
       loading: "loading",
       error: "error",
       user: "currentUser"
-    })
+    }),
   },
   async mounted() {
     this.$q.loading.show()
     await this.$store.dispatch('quiz/watchQuiz')
     this.$q.loading.hide()
-    console.log(this.listaQuiz)
   },
   methods: {
-    salvarResposta() {}
+    salvarResposta(item) {
+        let pontos = this.pontos
+        var listaQuiz = this.listaQuiz
+        var resposta = listaQuiz[0].data.respostacerta
+        var check = item.data.check
+        if (check === resposta) {
+            pontos++   
+           console.log("resposta certa", check, resposta, pontos)
+        } else {
+           console.log("resposta errada", check, resposta, pontos)
+        }
+    }
   }
 };
 </script>
