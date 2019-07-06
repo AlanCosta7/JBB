@@ -6,12 +6,13 @@ import { Loading, QSpinnerFacebook } from 'quasar'
 import { LocalStorage, SessionStorage } from 'quasar'
 import user from './user/index-firebase'
 import jornada from './module/jornada'
+import quiz from './module/quiz'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    user, jornada
+    user, jornada, quiz
   },
   state: {
     inscricao: "https://www.pallua.com.br/captacao/projeto/evento_despertar_2019",

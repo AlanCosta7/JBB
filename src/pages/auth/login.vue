@@ -43,7 +43,7 @@ import { firebase } from "../../plugins/firebase.js";
 
 export default {
   name: "PageLogin",
-  meta: { title: "garage thinking - Login" },
+  meta: { title: "Despertar 2019 - Login" },
   data() {
     return {};
   },

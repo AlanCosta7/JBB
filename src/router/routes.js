@@ -19,6 +19,7 @@ const routes = [
       { path: 'inicio', name: 'inicio', component: () => import('pages/app/Inicio.vue') },
       { path: 'jornada', name: 'jornada', component: () => import('pages/app/Jornada.vue') },
       { path: 'checkin', name: 'checkin', component: () => import('pages/app/Checkin') },
+      { path: 'quiz', name: 'quiz', component: () => import('pages/app/Quiz') },
       { path: 'votacao', component: () => import('pages/app/Votacao') },
     ]
   }
