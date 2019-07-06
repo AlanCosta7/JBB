@@ -14,3 +14,7 @@ export const startLoading = state => {
 export const stopLoading = state => {
   state.loading = false
 }
+
+export const setIndex = (state, payload) => {
+  state.index = payload
+}

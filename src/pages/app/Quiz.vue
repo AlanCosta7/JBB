@@ -1,9 +1,9 @@
-<template>
+<template> 
   <q-page class="bg-tertiary">
     <div class="q-pa-md row flex flex-center">
-      <q-card color="white" height="470px" v-for="item in listaQuiz" :key="item.id">
+      <q-card color="white" height="370px">
         <q-card-title>
-          <h3 class="lulobold text-black">{{item.data.pergunta}}</h3>
+          <p class="lulobold text-black">{{currentPergunta[0].data.pergunta}}</p>
         </q-card-title>
         <q-card-main>
           <div class="text-center">
@@ -11,44 +11,44 @@
               <div class="column">
                 <q-item tag="label">
                   <q-item-side>
-                    <q-radio color="amber" v-model="item.data.check" :val="item.data.resposta1" />
+                    <q-radio color="amber" v-model="currentPergunta[0].data.check" :val="currentPergunta[0].data.resposta1" />
                   </q-item-side>
                   <q-item-main>
-                    <q-item-tile class="tile left text-black lulo" label>{{item.data.resposta1}}</q-item-tile>
+                    <q-item-tile class="tile left text-black lulo" label>{{currentPergunta[0].data.resposta1}}</q-item-tile>
                   </q-item-main>
                 </q-item>
                 <q-item tag="label">
                   <q-item-side>
-                    <q-radio color="amber" v-model="item.data.check" :val="item.data.resposta2" />
+                    <q-radio color="amber" v-model="currentPergunta[0].data.check" :val="currentPergunta[0].data.resposta2" />
                   </q-item-side>
                   <q-item-main>
-                    <q-item-tile class="tile left text-black lulo" label>{{item.data.resposta2}}</q-item-tile>
+                    <q-item-tile class="tile left text-black lulo" label>{{currentPergunta[0].data.resposta2}}</q-item-tile>
                   </q-item-main>
                 </q-item>
                 <q-item tag="label">
                   <q-item-side>
-                    <q-radio color="amber" v-model="item.data.check" :val="item.data.resposta3" />
+                    <q-radio color="amber" v-model="currentPergunta[0].data.check" :val="currentPergunta[0].data.resposta3" />
                   </q-item-side>
                   <q-item-main>
-                    <q-item-tile class="tile left text-black lulo" label>{{item.data.resposta3}}</q-item-tile>
+                    <q-item-tile class="tile left text-black lulo" label>{{currentPergunta[0].data.resposta3}}</q-item-tile>
                   </q-item-main>
                 </q-item>
                 <q-item tag="label">
                   <q-item-side>
-                    <q-radio color="amber" v-model="item.data.check" :val="item.data.resposta4" />
+                    <q-radio color="amber" v-model="currentPergunta[0].data.check" :val="currentPergunta[0].data.resposta4" />
                   </q-item-side>
                   <q-item-main>
-                    <q-item-tile class="tile left text-black lulo" label>{{item.data.resposta4}}</q-item-tile>
+                    <q-item-tile class="tile left text-black lulo" label>{{currentPergunta[0].data.resposta4}}</q-item-tile>
                   </q-item-main>
                 </q-item>
-                <q-btn color="positive" @click="salvarResposta(item)" label="Salvar"></q-btn>
+                <q-btn color="positive" @click="salvarResposta(currentPergunta[0])" label="Salvar"></q-btn>
               </div>
             </div>
           </div>
         </q-card-main>
       </q-card>
     </div>
-  </q-page>
+  </q-page> 
 </template>
 
 <script>
@@ -58,13 +58,15 @@ export default {
   name: "PageQuiz",
   meta: { title: "Despertar 2019 - Quiz" },
   data() {
-    return {
-      pontos: 0  
+    return {  
     };
   },
   computed: {
     ...mapGetters({
+      currentPergunta: "quiz/currentPergunta",
       listaQuiz: "quiz/listaQuiz",
+      index: "quiz/index",
+      pontos: "quiz/pontos",
       loading: "loading",
       error: "error",
       user: "currentUser"
@@ -76,17 +78,28 @@ export default {
     this.$q.loading.hide()
   },
   methods: {
+      selectUsermap(item) {
+        console.debug('[tool:usermap] usermap selecionado.', item)
+        let i = this.usermaps.indexOf(item)
+        this.$store.dispatch('boards/usermap/addIndex', i)
+      },
     salvarResposta(item) {
-        let pontos = this.pontos
-        var listaQuiz = this.listaQuiz
-        var resposta = listaQuiz[0].data.respostacerta
+        var resposta = item.data.respostacerta
         var check = item.data.check
         if (check === resposta) {
-            pontos++   
-           console.log("resposta certa", check, resposta, pontos)
+            var pontos = this.pontos
+            var pt = pontos + 1
+            this.$store.dispatch('quiz/addPontos', pt )   
+            console.log(pt)
+
+           console.log("resposta certa")
         } else {
-           console.log("resposta errada", check, resposta, pontos)
+           console.log("resposta errada")
         }
+        let i = this.index
+        i++
+        
+        this.$store.dispatch('quiz/addIndex', i )
     }
   }
 };
