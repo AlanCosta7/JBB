@@ -64,6 +64,9 @@
         <q-item link @click.native="quiz()" v-if="currentUser && inscrito">
           <q-item-main class="text-no-wrap" label="Quiz JBB" sublabel="Teste seus conhecimentos" />
         </q-item>
+        <q-item link @click.native="ranking()" v-if="currentUser && inscrito">
+          <q-item-main class="text-no-wrap" label="Ranking" />
+        </q-item>
         <q-item link @click.native="sair()" v-if="currentUser" class="bg-negative text-white">
           <q-item-main class="text-no-wrap" label="Sair" />
         </q-item>
@@ -166,6 +169,11 @@ export default {
     },
     vip() {
       this.$router.push("/login");
+      const $menuDrawer = this.$refs.menuDrawer;
+      $menuDrawer.hide();
+    },
+    ranking() {
+      this.$router.push("/app/ranking");
       const $menuDrawer = this.$refs.menuDrawer;
       $menuDrawer.hide();
     },

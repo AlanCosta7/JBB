@@ -1,7 +1,26 @@
 <template> 
   <q-page class="bg-tertiary">
-    <div class="q-pa-md row flex flex-center">
+    <div style="width:295px" class="q-ma-md">
       <q-card color="white" height="370px">
+        <q-card-title>
+          <div class="row inline">
+            <img class="col-auto avatar" :src="user.photoURL" alt="avatar" />
+            <p class="col-auto lulo q-pa-xs flex flex-center text-black">{{user.nome}}</p>
+            <p class="col-auto q-pa-xs text-black flex flex-center">{{userPontos}}pt</p>
+          </div>
+        </q-card-title>
+      </q-card>
+    </div>
+    <div class="q-pa-md row flex flex-center">
+      <q-card color="white" height="370px" v-show="!quiz">
+        <q-card-title>
+          <div class="column flex flex-center">
+          <p class="lulobold text-black">Fim!</p>
+          <q-btn color="positive" label="ver ranking" to="/app/ranking"></q-btn>
+          </div>
+        </q-card-title>
+      </q-card>
+      <q-card color="white" height="370px" v-show="quiz">
         <q-card-title>
           <p class="lulobold text-black">{{currentPergunta[0].data.pergunta}}</p>
         </q-card-title>
@@ -41,7 +60,7 @@
                     <q-item-tile class="tile left text-black lulo" label>{{currentPergunta[0].data.resposta4}}</q-item-tile>
                   </q-item-main>
                 </q-item>
-                <q-btn color="positive" @click="salvarResposta(currentPergunta[0])" label="Salvar"></q-btn>
+                <q-btn color="positive" @click="salvarResposta(currentPergunta[0])" label="Responder"></q-btn>
               </div>
             </div>
           </div>
@@ -53,16 +72,19 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { executeConfirmAsync, executeAsync } from '../viewHelper.js'
 
 export default {
   name: "PageQuiz",
   meta: { title: "Despertar 2019 - Quiz" },
   data() {
     return {  
+      quiz: true,
     };
   },
   computed: {
     ...mapGetters({
+      ranking: "quiz/ranking",
       currentPergunta: "quiz/currentPergunta",
       listaQuiz: "quiz/listaQuiz",
       index: "quiz/index",
@@ -71,19 +93,43 @@ export default {
       error: "error",
       user: "currentUser"
     }),
+    userPontos() {
+      var ranking = this.ranking
+      var uid = this.user.uid
+      for (let i = 0; i < ranking.length; i++) {
+        const element = ranking[i]
+        if (uid === element.data.uid) {
+          var pontos = element.data.pontos
+          return pontos
+        } else {
+        return null
+      }   
+        
+      } 
+    },
+    userRanking() {
+      var ranking = this.ranking
+      var uid = this.user.uid
+      for (let i = 0; i < ranking.length; i++) {
+        const element = ranking[i]
+        if (uid === element.data.uid) {
+          var id = element.data.id
+          return id
+        } else {
+        return null
+      }   
+        
+      }    
+    }
   },
   async mounted() {
     this.$q.loading.show()
     await this.$store.dispatch('quiz/watchQuiz')
-    this.$q.loading.hide()
+    await this.$store.dispatch("quiz/loadRanking")
+    this.$q.loading.hide()  
   },
   methods: {
-      selectUsermap(item) {
-        console.debug('[tool:usermap] usermap selecionado.', item)
-        let i = this.usermaps.indexOf(item)
-        this.$store.dispatch('boards/usermap/addIndex', i)
-      },
-    salvarResposta(item) {
+   async salvarResposta(item) {
         var resposta = item.data.respostacerta
         var check = item.data.check
         if (check === resposta) {
@@ -93,13 +139,73 @@ export default {
             console.log(pt)
 
            console.log("resposta certa")
+            this.$q.notify({
+              color: 'positive',
+              icon: 'sentiment_satisfied_alt',
+              message: 'Parabéns! Resposta certa',
+              position: 'bottom',
+              timeout: 2000
+            })
+          
         } else {
            console.log("resposta errada")
+            this.$q.notify({
+              color: 'negative',
+              icon: 'sentiment_very_dissatisfied',
+              message: 'Resposta errada',
+              position: 'bottom',
+              timeout: 2000
+            })
         }
         let i = this.index
         i++
-        
-        this.$store.dispatch('quiz/addIndex', i )
+        if (i < 9) {
+          this.$store.dispatch('quiz/addIndex', i )
+        } else {
+          var user = this.user
+          var id = user.uid
+          const data = {
+            nome: user.displayName,
+            photoURL: user.photoURL,
+            uid: user.uid,
+            pontos: this.pontos
+          }
+          
+          var userRanking = this.userRanking
+        if (userRanking === null) {
+          await executeAsync({
+            instance: this,
+            promiseFn: () => this.$store.dispatch('quiz/addQuiz', {data} ),
+            messageSuccess: '',
+            messageError: ''
+          })
+        } else {
+          var pontos = this.pontos
+          var userPontos = this.userPontos
+          if (pontos > userPontos) {
+            await executeAsync({
+              instance: this,
+              promiseFn: () => this.$store.dispatch('quiz/uploadQuiz', {userRanking, data} ),
+              messageSuccess: '',
+              messageError: '.'
+            })
+          } else {
+            console.log('Tente novamente')
+          }
+        }
+            this.$q.notify({
+              color: 'positive',
+              icon: 'sentiment_satisfied_alt',
+              message: 'Parabéns! Vamos ver o resultado?',
+              position: 'bottom',
+              avatar: this.user.photoURL,
+              actions: [ { label: 'OK', handler: () => this.$router.push("/app/ranking") } ],
+              timeout: 30000
+            })
+          this.$store.dispatch('quiz/addIndex', 0 )
+          this.quiz = false,
+          console.log('fim')
+        }
     }
   }
 };

@@ -53,6 +53,31 @@ export async function addDoc(uid, jornada) {
   return docRef
 }
 
+export async function addDocQuiz(data) {
+
+  const docRef = await $firestore
+    .collection('ranking')
+    .doc('jbb')
+    .collection('id')
+    .add(data) 
+    
+  console.info('Doc adicionado:', docRef)
+  return docRef
+}
+
+export async function addId(data) {
+
+  const docRef = await $firestore
+    .collection('ranking')
+    .doc('jbb')
+    .collection('id')
+    .doc(data)
+    .update({id:data}) 
+    
+  console.info('Doc adicionado:', docRef)
+  return docRef
+}
+
 export async function addCadastro(uid, newCard) {
   console.log(newCard)
 

@@ -18,3 +18,7 @@ export const stopLoading = state => {
 export const setIndex = (state, payload) => {
   state.index = payload
 }
+
+export const setRanking = (state, payload) => {
+  state.ranking = payload
+}

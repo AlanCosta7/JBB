@@ -3,4 +3,5 @@ export default {
   listaQuiz: [],
   index: 0,
   loading: false,
+  ranking: []
 }
