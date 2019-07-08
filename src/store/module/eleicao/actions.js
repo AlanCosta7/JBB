@@ -1,68 +1,149 @@
 import { $firestore } from 'plugins/firebase'
-import { assert, mapQuerySnapshot, getCommonsIds, addDoc } from '../../shared/helper'
+import { assert, mapQuerySnapshot, getCommonsIds, addDocVoto } from '../../shared/helper'
 import { pick } from 'lodash-es'
 
-export const watchRegiao = async ({ commit }) => {
+export const watchCentrooeste = async ({ commit }) => {
+
   commit('startLoading')
 
   const cards = await $firestore
     .collection('eleicao')
     .doc('regiao')
-    .collection()
+    .collection('centrooeste')
+    .doc('centrooeste')
+    .collection('candidato')
     .get()
     .catch(err => {
       console.error('Erro ao tentar carregar "eleição"', err)
     })
     .then(mapQuerySnapshot)
 
-  commit('setRegiao', cards) 
+  commit('setCentrooeste', cards) 
   commit('stopLoading')
 }
 
-export const addJornada = async ({rootState, commit}, {data}) => {
-  const validKeys = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9']
+
+export const watchNorte = async ({ commit }) => {
+
+  commit('startLoading')
+
+  const cards = await $firestore
+    .collection('eleicao')
+    .doc('regiao')
+    .collection('norte')
+    .doc('norte')
+    .collection('candidato')
+    .get()
+    .catch(err => {
+      console.error('Erro ao tentar carregar "eleição"', err)
+    })
+    .then(mapQuerySnapshot)
+
+  commit('setNorte', cards) 
+  commit('stopLoading')
+}
+
+
+export const watchNordeste = async ({ commit }) => {
+
+  commit('startLoading')
+
+  const cards = await $firestore
+    .collection('eleicao')
+    .doc('regiao')
+    .collection('nordeste')
+    .doc('nordeste')
+    .collection('candidato')
+    .get()
+    .catch(err => {
+      console.error('Erro ao tentar carregar "eleição"', err)
+    })
+    .then(mapQuerySnapshot)
+
+  commit('setNordeste', cards) 
+  commit('stopLoading')
+}
+
+
+export const watchSul = async ({ commit }) => {
+
+  commit('startLoading')
+
+  const cards = await $firestore
+    .collection('eleicao')
+    .doc('regiao')
+    .collection('sul')
+    .doc('sul')
+    .collection('candidato')
+    .get()
+    .catch(err => {
+      console.error('Erro ao tentar carregar "eleição"', err)
+    })
+    .then(mapQuerySnapshot)
+
+  commit('setSul', cards) 
+  commit('stopLoading')
+}
+
+
+export const watchSuldeste = async ({ commit }) => {
+
+  commit('startLoading')
+
+  const cards = await $firestore
+    .collection('eleicao')
+    .doc('regiao')
+    .collection('sudeste')
+    .doc('sudeste')
+    .collection('candidato')
+    .get()
+    .catch(err => {
+      console.error('Erro ao tentar carregar "eleição"', err)
+    })
+    .then(mapQuerySnapshot)
+
+  commit('setSuldeste', cards) 
+  commit('stopLoading')
+}
+
+export const salvaVoto = async ({rootState, commit}, {data}) => {
+  const validKeys = ['Centro', 'Norte', 'Nordeste', 'Suldeste', 'Sul', 'Usuario']
   const newCard = pick(data, validKeys)
   //console.log(newCard)
 
   const {uid} = getCommonsIds({ rootState })
   assert(uid, 'projectId')
 
-  const docRef = await addDoc(uid, newCard)
+  const docRef = await addDocVoto(uid, newCard)
   return docRef.id
 
 }
 
-export const salvaJornada = async ({rootState, commit}, {id, data}) => {
-  const validKeys = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9']
-  const newCard = pick(data, validKeys)
 
+export const loadVoto = async ({rootState, commit}) => {
   const {uid} = getCommonsIds({ rootState })
   assert(uid, 'projectId')
-// console.log(id, newCard)
-  await $firestore
-    .collection('usuario')
-    .doc(uid)
-    .collection('map')
-    .doc(id)
-    .update(newCard)
 
-}
-
-export const loadMaps = async ({ rootState, commit }) => {
-  const { uid } = getCommonsIds({ rootState })
-  assert(uid, 'projectId')
-  commit('startLoading')
-
-  const cards = await $firestore
-    .collection('usuario')
-    .doc(uid)
-    .collection('map')
+  const votoUId = await $firestore
+    .collection('eleicao')
+    .doc('resultado')
+    .collection(uid)
     .get()
     .catch(err => {
-      console.error('Erro ao tentar carregar "cards"', err)
+      console.error('Erro ao tentar carregar "eleição"', err)
     })
     .then(mapQuerySnapshot)
 
-  commit('setMaps', cards)
-  commit('stopLoading')
+    for (let i = 0; i < votoUId.length; i++) {
+      const element = votoUId[i].data.Usuario;
+        
+        if (element === uid) {
+          commit('startVoto', true)
+          console.log(element)
+
+        } else {
+
+        } 
+    }
+
 }

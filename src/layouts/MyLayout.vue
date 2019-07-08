@@ -138,6 +138,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      startvoto: "eleicao/startvoto",
       inscrito: "inscrito",
       loading: "loading",
       error: "error",
@@ -145,6 +146,13 @@ export default {
       currentUser: "currentUser",
       video: "video"
     })
+  },
+  async mounted() {
+    this.$q.loading.show();
+    await this.$store.dispatch("loadCadastro");
+    await this.$store.dispatch("loadCpf");
+    await this.$store.dispatch("eleicao/loadVoto");
+    this.$q.loading.hide();
   },
   methods: {
     toggleMenu() {
@@ -178,9 +186,20 @@ export default {
       $menuDrawer.hide();
     },
     eleição() {
-      this.$router.push("/app/votacao");
-      const $menuDrawer = this.$refs.menuDrawer;
-      $menuDrawer.hide();
+      var startvoto = this.startvoto;
+      if (!startvoto) {
+        this.$router.push("/app/votacao");
+        const $menuDrawer = this.$refs.menuDrawer;
+        $menuDrawer.hide();
+      } else {
+        const $menuDrawer = this.$refs.menuDrawer;
+        $menuDrawer.hide();
+        this.$q.notify({
+          message: "Seu voto já foi registrado",
+          type: "negative",
+          timeout: 1500
+        });
+      }
     },
     inscricao() {
       this.openedinscri = true;

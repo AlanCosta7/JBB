@@ -41,13 +41,24 @@ export function mapDocumentSnapshot(docSnapshot) {
 }
 
 export async function addDoc(uid, jornada) {
-  console.log(jornada)
 
   const docRef = await $firestore
     .collection('usuario')
     .doc(uid)
     .collection('map')
     .add(jornada) 
+
+  console.info('Doc adicionado:', docRef)
+  return docRef
+}
+
+export async function addDocVoto(uid, newCard) {
+
+  const docRef = await $firestore
+    .collection('eleicao')
+    .doc('resultado')
+    .collection(uid)
+    .add(newCard) 
 
   console.info('Doc adicionado:', docRef)
   return docRef

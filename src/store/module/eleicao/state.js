@@ -1,4 +1,9 @@
 export default {
-  regiao: [],
+  centrooeste: [],
+  norte: [],
+  nordeste: [],
+  sul: [],
+  suldeste: [],
+  startvoto: false,
   loading: false,
 }
