@@ -32,7 +32,7 @@ export const addQuiz = async ({rootState, commit}, {data}) => {
 
   const {uid} = getCommonsIds({ rootState })
   assert(uid, 'projectId')
-
+  console.log(data)
  const docRef = await addDocQuiz(data)
  const docRefId = docRef.id
  

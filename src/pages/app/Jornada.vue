@@ -80,6 +80,7 @@ export default {
     this.$q.loading.show()
     await this.$store.dispatch('jornada/loadMaps')
     this.$q.loading.hide()
+    console.log(this.listaMaps)
   },
   methods: {
     async salvarJornada() {
@@ -99,7 +100,6 @@ export default {
       }
     
     var id = lista[0].id
-
      await executeAsync({
           instance: this,
           promiseFn: () => this.$store.dispatch('jornada/salvaJornada', {id, data}),

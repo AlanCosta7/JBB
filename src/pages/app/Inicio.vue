@@ -135,9 +135,18 @@ export default {
         p9: jornada[8]
       };
       if (this.inscrito) {
-        this.$store.dispatch("jornada/addJornada", { data });
-        this.$router.replace({ name: "jornada" });
+        if (this.listaMaps.length == 0) {
+         console.log('criar jornada', this.listaMaps.length) 
+
+         this.$store.dispatch("jornada/addJornada", { data });
+          this.$router.replace({ name: "jornada" });          
+        } else{
+        console.log('não criar', this.listaMaps.length)
+          this.$router.replace({ name: "jornada" });          
+        }
+
       } else {
+
         this.$q.notify({
           message: "Você não está inscrito. Entre em contato conosco.",
           type: "negative",

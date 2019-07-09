@@ -171,12 +171,14 @@ export default {
           }
           
           var userRanking = this.userRanking
+                              console.log(userRanking)
+
         if (userRanking === null) {
           await executeAsync({
             instance: this,
             promiseFn: () => this.$store.dispatch('quiz/addQuiz', {data} ),
-            messageSuccess: '',
-            messageError: ''
+            messageSuccess: 'Fim',
+            messageError: 'Erro'
           })
         } else {
           var pontos = this.pontos
@@ -185,8 +187,8 @@ export default {
             await executeAsync({
               instance: this,
               promiseFn: () => this.$store.dispatch('quiz/uploadQuiz', {userRanking, data} ),
-              messageSuccess: '',
-              messageError: '.'
+              messageSuccess: 'Fim',
+              messageError: 'Erro'
             })
           } else {
             console.log('Tente novamente')
@@ -202,10 +204,9 @@ export default {
               timeout: 30000
             })
           this.$store.dispatch('quiz/addIndex', 0 )
-          this.quiz = false,
-          console.log('fim')
+          this.quiz = false
         }
     }
   }
-};
+}
 </script>
