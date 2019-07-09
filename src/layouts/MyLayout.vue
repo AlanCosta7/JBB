@@ -17,17 +17,10 @@
         />
       </q-toolbar>
     </q-layout-header>
-    <q-layout-drawer
-      content-class="bg-neutral"
-      content-style="{color: 'black', padding: '20px', padding-top: '70px'}"
-      side="left"
-      overlay="true"
-      behavior="mobile"
-      ref="menuDrawer"
-    >
+    <q-layout-drawer content-class="bg-neutral" side="left" behavior="mobile" ref="menuDrawer">
       <div v-if="currentUser.photoURL" class="bg-primary row q-pa-md full-width flex items-center">
         <img class="avatar" :src="currentUser.photoURL" />
-        <p class="text-white q-pl-md q-pt-md">{{currentUser.nome}}</p>
+        <p class="text-white q-pl-md q-pt-md">{{currentUser.nome.substring(0, 15)}}</p>
       </div>
 
       <!-- Lista de menu -->
@@ -74,27 +67,31 @@
     </q-layout-drawer>
 
     <q-page-container>
-      <q-modal v-model="jbbtv" maximized v-if="jbbtv">
-        <div style="background: black" class>
-          <div class="q-video">
-            <q-btn
-              v-if="btnjbbtv"
-              round
-              size="md"
-              @click.native="sairtv()"
-              icon="close"
-              class="btntv center z-max"
-            />
-            <iframe
-              class="iframe"
-              style="height: 500px; width:100%"
-              :src="video"
-              frameborder="0"
-              allowfullscreen
-            ></iframe>
-          </div>
-        </div>
-      </q-modal>
+      <!-- Modal JBB TV -->
+    <q-modal v-model="jbbtv" class="z-max" maximized>
+      <q-btn
+        v-if="jbbtv"
+        round
+        size="md"
+        @click.native="jbbtv = false"
+        icon="close"
+        color="negative"
+        style="right: 48%; top: 18px"
+        class="z-max fixed q-mr-lg desktop-only"
+      />
+      <iframe width="100%" height="90%" :src="video" class="videoteaser" frameborder="0"></iframe>
+      
+      <q-btn
+        v-if="jbbtv"
+        round
+        size="md"
+        @click.native="jbbtv = false"
+        icon="close"
+        color="negative"
+        style="right: 35%; bottom: 12px"
+        class="z-max fixed q-mr-lg mobile-only"
+      />
+    </q-modal>
       <router-view class="rota" />
     </q-page-container>
     <!-- Modal Maps -->

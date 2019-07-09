@@ -88,12 +88,12 @@ export default {
       var lista = this.listaMaps
       var listaMaps = lista[0].data
       var data = {
-        p1: listaMaps.p4,
-        p2: listaMaps.p5,
-        p3: listaMaps.p6,
-        p4: listaMaps.p1,
-        p5: listaMaps.p2,
-        p6: listaMaps.p3,
+        p1: listaMaps.p1,
+        p2: listaMaps.p2,
+        p3: listaMaps.p3,
+        p4: listaMaps.p4,
+        p5: listaMaps.p5,
+        p6: listaMaps.p6,
         p7: listaMaps.p7,
         p8: listaMaps.p8,
         p9: listaMaps.p9,

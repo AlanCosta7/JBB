@@ -73,12 +73,13 @@ export const loadRanking = async ({ rootState, commit }) => {
     .collection('ranking')
     .doc('jbb')
     .collection('id')
+    .orderBy("pontos", "desc")
     .get()
     .catch(err => {
       console.error('Erro ao tentar carregar "Ranking"', err)
     })
     .then(mapQuerySnapshot)
-
+   
   commit('setRanking', cards)
   commit('stopLoading')
 }

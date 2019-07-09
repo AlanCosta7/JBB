@@ -3,10 +3,10 @@
     <div style="width:295px" class="q-ma-md">
       <q-card color="white" height="370px">
         <q-card-title>
-          <div class="row inline">
+          <div class="row items-center">
             <img class="col-auto avatar" :src="user.photoURL" alt="avatar" />
-            <p class="col-auto lulo q-pa-xs flex flex-center text-black">{{user.nome}}</p>
-            <p class="col-auto q-pa-xs text-black flex flex-center">{{userPontos}}pt</p>
+            <p class="col-auto lulo q-px-xs text-black">{{user.nome.substring(0, 15)}}</p>
+            <p class="col-auto q-caption text-weight-bold q-px-xs text-black">{{userPontos}}pt</p>
           </div>
         </q-card-title>
       </q-card>
@@ -96,16 +96,11 @@ export default {
     userPontos() {
       var ranking = this.ranking
       var uid = this.user.uid
-      for (let i = 0; i < ranking.length; i++) {
-        const element = ranking[i]
-        if (uid === element.data.uid) {
-          var pontos = element.data.pontos
-          return pontos
-        } else {
-        return null
-      }   
-        
-      } 
+      var ref = ranking.filter(c => c.data.uid === uid) 
+      if (ref.length > 0) {
+      return ref[0].data.pontos               
+      }
+      return 0//ref[0].data.pontos       
     },
     userRanking() {
       var ranking = this.ranking
@@ -127,6 +122,7 @@ export default {
     await this.$store.dispatch('quiz/watchQuiz')
     await this.$store.dispatch("quiz/loadRanking")
     this.$q.loading.hide()  
+    console.log(this.userPontos)
   },
   methods: {
    async salvarResposta(item) {
@@ -171,7 +167,6 @@ export default {
           }
           
           var userRanking = this.userRanking
-                              console.log(userRanking)
 
         if (userRanking === null) {
           await executeAsync({
