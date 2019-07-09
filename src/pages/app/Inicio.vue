@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bg-tertiary">
+  <q-page class="bg-tertiary" id="page-inicio">
     <div class="q-pa-md row flex items-center">
       <q-carousel v-model="slide" color="amber" arrows height="500px">
         <q-carousel-slide class="flex flex-center bg-tertiary">
@@ -107,8 +107,6 @@ export default {
     await this.$store.dispatch("jornada/loadMaps");
     this.$q.loading.hide();
 
-    console.log(this.inscrito);
-
     if (this.listaMaps == true) {
       const rediretDelay = 2000;
       this.redirectToApp(rediretDelay);
@@ -136,7 +134,6 @@ export default {
         p8: jornada[7],
         p9: jornada[8]
       };
-      //console.log(data)
       if (this.inscrito) {
         this.$store.dispatch("jornada/addJornada", { data });
         this.$router.replace({ name: "jornada" });
@@ -151,46 +148,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.btn {
-  width: 100%;
-}
-
-.btns {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  height: 40px;
-}
-#photoURL {
-  width: 100px;
-  height: 100px;
-}
-
-.lulo {
-  text-align: center;
-}
-
-.widthlulo {
-  width: 60%;
-  font-size: 1em;
-}
-
-.btntv3 {
-  background-image: linear-gradient(red, yellow);
-  border-radius: 100%;
-  width: 70px;
-  height: 70px;
-}
-
-.tv {
-  font-size: 2em;
-  text-align: center;
-}
-
-#photoURL {
-  width: 90px;
-  height: 90px;
-}
-</style>

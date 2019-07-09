@@ -1,4 +1,4 @@
-<template class="templatehome">
+<template>
   <q-page id="page-index">
     <q-toolbar color="primary" class="row fixed z-max">
       <q-btn @click="toggleMenu()" flat round dense icon="menu" class="q-mr-lg" />
@@ -616,7 +616,7 @@
     </div>
 
     <!-- Modal Video Teaser -->
-    <q-modal v-model="opened" class="z-max desktop-only" maximized>
+    <q-modal v-model="opened" class="z-max" maximized>
       <q-btn
         v-if="opened"
         round
@@ -625,9 +625,20 @@
         icon="close"
         color="negative"
         style="right: 48%; top: 18px"
-        class="z-max fixed q-mr-lg"
+        class="z-max fixed q-mr-lg desktop-only"
       />
-      <iframe width="100%" height="100%" :src="video" class="videoteaser" frameborder="0"></iframe>
+      <iframe width="100%" height="90%" :src="video" class="videoteaser" frameborder="0"></iframe>
+      
+      <q-btn
+        v-if="opened"
+        round
+        size="md"
+        @click.native="opened = false"
+        icon="close"
+        color="negative"
+        style="right: 35%; bottom: 18px"
+        class="z-max fixed q-mr-lg mobile-only"
+      />
     </q-modal>
 
     <!-- Modal Inscrição Desktop-->
@@ -774,96 +785,15 @@ export default {
 </script>
 
 <style>
-.btntv {
-  background-image: linear-gradient(red, yellow);
-  color: white;
-}
-
-.btntv2 {
-  background-image: linear-gradient(red, yellow);
-  color: white;
-}
-
-.rio {
-  font-family: lulo;
-  font-size: 0.75em;
-}
-
-.despertar {
-  font-family: lulobold;
-  font-size: 0.75em;
-}
-
-.btnmenu {
-  font-family: lulobold;
-  font-size: 0.75em;
-}
-.rota {
-  padding-top: 50px;
-}
-
-.center {
-  position: absolute;
-  left: 45%;
-  margin-top: 10px;
-  z-index: 1;
-}
-
-.iframe {
-  z-index: 0;
-  margin-top: 60px;
-}
-
-.cardhotel {
-  width: 320px;
-}
-
-.line {
-  border-top-width: 1px;
-  border-top-style: solid;
-  border-top-color: #fff;
-}
-
-.circulo {
-  border-radius: 100%;
-  border-width: 1px;
-  border-style: solid;
-  border-color: #fff;
-}
-
-.aviao {
-  font-size: 8em;
-}
-
-.lulobold {
-  font-family: lulobold;
-}
-
-.lulo {
-  font-family: lulo;
-  font-size: 1.5em;
-}
-
-.tabelaprograma {
-  width: 100%;
-  min-width: 320px;
-}
-
-.q-tab-pane div {
-  padding: 2px;
-  z-index: 1;
-  font-family: lulo;
-  font-size: 0.75em;
-}
-
-.modelInscricao {
+  
+.modelMaps {
   width: 850px;
   height: 750px;
   max-width: 100%;
   max-height: 90%;
 }
 
-.modelMaps {
+.modelInscricao {
   width: 850px;
   height: 750px;
   max-width: 100%;

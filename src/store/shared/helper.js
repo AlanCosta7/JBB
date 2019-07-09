@@ -90,7 +90,6 @@ export async function addId(data) {
 }
 
 export async function addCadastro(uid, newCard) {
-  console.log(newCard)
 
   const docRef = await $firestore
     .collection('usuario')

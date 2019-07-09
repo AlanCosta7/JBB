@@ -1,5 +1,5 @@
 <template>
-  <q-page class="page-cadastro">
+  <q-page class="page-cadastro" id="page-cadastro">
     <q-layout class="flex column bg-tertiary">
       <div class="bg-tertiary cardtop">
         <div class="row flex flex-left gt-m">
@@ -108,7 +108,6 @@ export default {
     this.$q.loading.show()
     await this.$store.dispatch('loadCadastro')
     this.$q.loading.hide()
-    console.log(this.currentCadastrado)
      if (this.currentCadastrado.length > 0) {
       const rediretDelay = 2000;
       this.redirectToApp(rediretDelay);
@@ -152,36 +151,3 @@ export default {
   }
 };
 </script>
-
-<style>
-.cardtop {
-  width: 100%;
-  height: 200px;
-  padding: 2em 1rem;
-  text-align: center;
-}
-
-.cardlogin {
-  position: relative;
-  border-radius: 5px;
-  background-color: white;
-  padding: 2rem 2rem;
-}
-
-.q-card-container {
-  padding: 0;
-  margin: 0;
-}
-
-.q-card-title {
-  font-size: 1em;
-  text-align: left;
-  padding: 0;
-  margin: 0;
-}
-
-.styleCard {
-  min-width: 100%;
-  max-width: 220px;
-}
-</style>

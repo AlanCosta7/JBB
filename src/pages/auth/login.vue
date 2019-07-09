@@ -1,5 +1,5 @@
 <template>
-  <q-page class="page-login">
+  <q-page class="page-login" id="page-login">
     <q-layout class="flex column bg-tertiary">
       <div class="bg-tertiary cardtop">
         <div class="flex flex-left gt-m">
@@ -122,68 +122,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.page-login .cardtop {
-  width: 100%;
-  height: 200px;
-  padding: 2em 1rem;
-  text-align: center;
-}
-
-.page-login .base-logo {
-  max-width: 200px;
-}
-
-.page-login .cardlogin {
-  position: relative;
-  border-radius: 5px;
-  background-color: white;
-  padding: 2rem 2rem;
-}
-
-.page-login .subtitulo {
-  font-size: 1.5em;
-}
-
-.page-login .firebaseui-idp-button {
-  max-width: 300px;
-  min-height: 60px;
-  border-radius: 30px;
-}
-
-.page-login .firebaseui-idp-text {
-  font-size: 18px;
-}
-
-.page-login h1 {
-  font-size: 56px;
-  font-weight: 200;
-}
-
-.page-login h2 {
-  font-size: 2em;
-  font-weight: 400;
-  margin: 0;
-  padding: 10px;
-}
-
-@media only screen and (max-width: 480px) {
-  .page-login .q-layout-footer .q-btn {
-    display: block;
-  }
-
-  .page-login .firebaseui-idp-button {
-    max-width: 100%;
-    min-height: 60px;
-    border-radius: 30px;
-  }
-
-  /* .firebaseui-list-item {
-  } */
-
-  .page-login .firebaseui-card-content {
-    padding: 0;
-  }
-}
-</style>

@@ -1,5 +1,5 @@
 <template>
-    <q-page>
+    <q-page id="page-votacao">
     <div class="q-pa-md row flex flex-center bg-tertiary">
         <div v-if="startvoto"> <h3>Seu voto já foi registrado</h3></div>
       <q-carousel v-model="slide" color="amber" arrows height="470px" v-if="!startvoto">
@@ -168,7 +168,6 @@ export default {
             await this.$store.dispatch('eleicao/watchSul')
             await this.$store.dispatch('eleicao/watchSuldeste')
             this.$q.loading.hide()
-            console.log(this.startvoto)
         },
         methods: {
           async votar() {
@@ -194,26 +193,4 @@ export default {
         },
     }
 </script>
-      
-<style>
-    .imgemCard {
-      object-fit: cover;
-      border-radius: 100%;
-      width: 50px;
-      height: 50px;
-    }
-    .nome {
-        padding-left: 4%
-    }
-    .btn {
-    width: 100%;
-    }
-    .btns {
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-        height: 40px;
-    }
-
-</style>
       

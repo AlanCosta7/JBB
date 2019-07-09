@@ -1,5 +1,5 @@
 <template>
-  <q-page class="bg-tertiary">
+  <q-page class="bg-tertiary" id="page-jornada">
     <div class="q-pa-md row flex flex-center">
       <q-carousel v-model="slide" color="amber" arrows height="470px">
         <q-carousel-slide class="bg-tertiary" v-for="item in listaMaps[0].data" :key="item.id">
@@ -110,59 +110,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.btn {
-  width: 100%;
-}
-
-.btns {
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  height: 40px;
-}
-#photoURL {
-  width: 50px;
-  height: 50px;
-}
-
-.lulo {
-  font-family: lulo;
-}
-
-.widthlulo {
-  width: 60%;
-  font-size: 1.25em;
-}
-
-.btntv3 {
-  background-image: linear-gradient(red, yellow);
-  border-radius: 100%;
-  width: 80px;
-  height: 80px;
-}
-
-.tv{
-    font-size: 3em;
-    text-align: center
-}
-
-.tile {
-  font-size: 0.75em
-}
-
-.sizehorario {
-  font-size: .65em
-}
-
-h3 {
-  font-size: 1.25em;
-  padding: 0;
-  margin: 0;
-}
-
-.left {
-  text-align: left;
-}
-</style>

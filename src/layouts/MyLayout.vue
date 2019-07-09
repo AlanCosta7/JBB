@@ -1,5 +1,5 @@
 <template>
-  <q-layout>
+  <q-layout id="page-mylayout">
     <q-layout-header>
       <q-toolbar color="tertiary" class="row fixed">
         <q-btn @click="toggleMenu()" flat round dense icon="menu" class="q-mr-lg" />
@@ -242,46 +242,6 @@ export default {
 </script>
 
 <style>
-.btntv {
-  background-image: linear-gradient(red, yellow);
-  color: white;
-}
-
-.btntv2 {
-  background-image: linear-gradient(red, yellow);
-  color: white;
-}
-
-.rio {
-  font-family: lulo;
-  font-size: 0.75em;
-}
-
-.despertar {
-  font-family: lulobold;
-  font-size: 0.75em;
-}
-
-.btnmenu {
-  font-family: lulobold;
-  font-size: 0.75em;
-}
-.rota {
-  padding-top: 50px;
-}
-
-.center {
-  position: absolute;
-  left: 45%;
-  margin-top: 10px;
-  z-index: 1;
-}
-
-.iframe {
-  z-index: 0;
-  margin-top: 60px;
-}
-
 .modelMaps {
   width: 850px;
   height: 750px;

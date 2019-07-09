@@ -19,7 +19,6 @@ export const watchQuiz = async ({ commit }) => {
     })
     .then(mapQuerySnapshot)
     listaQuiz.push(cards) 
-   // console.log(listaQuiz)
   }
   commit('setQuiz', listaQuiz) 
 
@@ -48,7 +47,6 @@ export const salvaQuiz = async ({rootState, commit}, {id, data}) => {
 
   const {uid} = getCommonsIds({ rootState })
   assert(uid, 'projectId')
-// console.log(id, newCard)
   await $firestore
     .collection('usuario')
     .doc(uid)

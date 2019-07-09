@@ -18,7 +18,6 @@ export const watchJornada = async ({ commit }) => {
     })
     .then(mapQuerySnapshot)
     listaJornada.push(cards) 
-   // console.log(listaJornada)
   }
 
   commit('setJornada', listaJornada) 
@@ -28,7 +27,6 @@ export const watchJornada = async ({ commit }) => {
 export const addJornada = async ({rootState, commit}, {data}) => {
   const validKeys = ['p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'p7', 'p8', 'p9']
   const newCard = pick(data, validKeys)
-  //console.log(newCard)
 
   const {uid} = getCommonsIds({ rootState })
   assert(uid, 'projectId')
@@ -44,7 +42,6 @@ export const salvaJornada = async ({rootState, commit}, {id, data}) => {
 
   const {uid} = getCommonsIds({ rootState })
   assert(uid, 'projectId')
-// console.log(id, newCard)
   await $firestore
     .collection('usuario')
     .doc(uid)

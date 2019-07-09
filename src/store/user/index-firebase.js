@@ -11,8 +11,14 @@ export default {
     currentUser: null, 
     currentCadastrado: null,   
     loading: false,
+    checkin: null
   },
   getters: {
+    checkin(state) {
+      var uid = state.currentUser.uid
+      var cod = "https://despertar-checkin.surge.sh/#/users/" + uid + "/checkin"
+      return state.checkin = cod
+    },
     inscrito(state){
       return state.inscrito
     },
@@ -62,7 +68,6 @@ export default {
     async salvaCadastro ({rootState, commit}, {data}) {
       const validKeys = ['cpf', 'cidade', 'uf', 'bairro', 'logradouro', 'cep']
       const newCard = pick(data, validKeys)
-      //console.log(newCard)
 
       const {uid} = getCommonsIds({ rootState })
       assert(uid, 'projectId')
@@ -86,10 +91,8 @@ export default {
           console.error('Erro ao tentar carregar "cadastro"', err)
         })
         .then(mapQuerySnapshot)
-        //console.log(cards)
         if (cards.length > 0) {
           let meuCard = cards[0].data.cpf
-          console.log(meuCard)
 
           commit('setUserCadastrado', meuCard)
         }

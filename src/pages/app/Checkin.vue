@@ -1,5 +1,5 @@
 <template>
-  <q-page class="flex flex-center column">
+  <q-page class="flex flex-center column" id="page-chekin">
     <div class="bg-tertiary absolute-top items-center divHero column" style="height: 300px">
       <template v-if="user.photoURL">
         <img class="avatar" :src="user.photoURL" id="photoURL">
@@ -32,37 +32,12 @@
         loading: 'loading',
         error: 'error',
         user: 'currentUser',
-        value: 'user.uid'
+        value: 'checkin'
       })
+    },
+    mounted(){
+      var checkin = this.checkin
+      console.log(checkin)
     }
   }
 </script>
-
-<style>
-  .btn {
-    width: 100%;
-  }
-
-  .btns {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    height: 40px;
-  }
-  #photoURL {
-    width: 100px;
-    height: 100px;
-  }
-  .chave {
-    position: absolute;
-    bottom: 10%
-  }
-
-  .divHero {
-    padding-top: 60px
-  }
-
-  .zindex{
-    z-index: 100;
-  }
-</style>

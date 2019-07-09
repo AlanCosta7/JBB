@@ -109,7 +109,6 @@ export const watchSuldeste = async ({ commit }) => {
 export const salvaVoto = async ({rootState, commit}, {data}) => {
   const validKeys = ['Centro', 'Norte', 'Nordeste', 'Suldeste', 'Sul', 'Usuario']
   const newCard = pick(data, validKeys)
-  //console.log(newCard)
 
   const {uid} = getCommonsIds({ rootState })
   assert(uid, 'projectId')
@@ -139,7 +138,6 @@ export const loadVoto = async ({rootState, commit}) => {
         
         if (element === uid) {
           commit('startVoto', true)
-          console.log(element)
 
         } else {
 
