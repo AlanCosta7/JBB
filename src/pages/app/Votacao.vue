@@ -2,9 +2,9 @@
     <q-page id="page-votacao">
     <div class="q-pa-md row flex flex-center bg-tertiary">
         <div v-if="startvoto"> <h3>Seu voto já foi registrado</h3></div>
-        <div v-if="!eleicao"> <h3>A eleição será na Sexta-feira</h3></div>
+        <div v-if="eleicao !== true"> <h3>A eleição será na Sexta-feira</h3></div>
 
-      <q-carousel v-model="slide" color="amber" arrows height="470px" v-if="!startvoto && eleicao">
+      <q-carousel v-model="slide" color="amber" arrows height="470px" v-if="!startvoto && eleicao == true">
         <q-carousel-slide class="bg-white">
           <div class="text-center">
             <div class="flex flex-center">
@@ -112,7 +112,7 @@
         </q-carousel-slide>
       </q-carousel>
       <div class="flex flex-center q-ma-md">
-        <q-btn :disable="liberado" color="positive" @click="votar()" label="Votar" v-if="!startvoto && eleicao"></q-btn>
+        <q-btn :disable="liberado" color="positive" @click="votar()" label="Votar" v-if="!startvoto && eleicao == true"></q-btn>
       </div>
     </div>
     </q-page>
@@ -162,6 +162,13 @@ export default {
                 return true
             }        
         },
+        async created() {
+          this.$q.loading.show()
+          await this.$store.dispatch('loadEleicao')
+          
+            console.log(this.eleicao)
+          this.$q.loading.hide()
+        },
         async mounted() {
             this.$q.loading.show()
             await this.$store.dispatch('eleicao/loadVoto')
@@ -170,9 +177,7 @@ export default {
             await this.$store.dispatch('eleicao/watchNordeste')
             await this.$store.dispatch('eleicao/watchSul')
             await this.$store.dispatch('eleicao/watchSuldeste')
-            await this.$store.dispatch('loadEleicao')
             this.$q.loading.hide()
-            console.log(this.eleicao)
         },
         methods: {
           async votar() {
