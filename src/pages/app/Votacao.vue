@@ -2,7 +2,9 @@
     <q-page id="page-votacao">
     <div class="q-pa-md row flex flex-center bg-tertiary">
         <div v-if="startvoto"> <h3>Seu voto já foi registrado</h3></div>
-      <q-carousel v-model="slide" color="amber" arrows height="470px" v-if="!startvoto">
+        <div v-if="!eleicao"> <h3>A eleição será na Sexta-feira</h3></div>
+
+      <q-carousel v-model="slide" color="amber" arrows height="470px" v-if="!startvoto && eleicao">
         <q-carousel-slide class="bg-white">
           <div class="text-center">
             <div class="flex flex-center">
@@ -71,7 +73,7 @@
           <div class="text-center">
             <div class="flex flex-center">
               <div class="column">
-                <h3 class="lulobold">Suldeste</h3>
+                <h3 class="lulobold">Sudeste</h3>
                 <p class="lulo text-white sizehorario"></p>
                 <q-list v-for="item in suldeste" :key="item.id">
                   <q-item tag="label">
@@ -110,7 +112,7 @@
         </q-carousel-slide>
       </q-carousel>
       <div class="flex flex-center q-ma-md">
-        <q-btn :disable="liberado" color="positive" @click="votar()" label="Votar" v-if="!startvoto"></q-btn>
+        <q-btn :disable="liberado" color="positive" @click="votar()" label="Votar" v-if="!startvoto && eleicao"></q-btn>
       </div>
     </div>
     </q-page>
@@ -136,6 +138,7 @@ export default {
         },
         computed: {
             ...mapGetters({
+                eleicao: 'eleicao',
                 centrooeste: 'eleicao/centrooeste',
                 norte: 'eleicao/norte',
                 nordeste: 'eleicao/nordeste',
@@ -167,7 +170,9 @@ export default {
             await this.$store.dispatch('eleicao/watchNordeste')
             await this.$store.dispatch('eleicao/watchSul')
             await this.$store.dispatch('eleicao/watchSuldeste')
+            await this.$store.dispatch('loadEleicao')
             this.$q.loading.hide()
+            console.log(this.eleicao)
         },
         methods: {
           async votar() {
