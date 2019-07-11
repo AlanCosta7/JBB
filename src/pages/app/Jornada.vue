@@ -44,6 +44,22 @@
                     <q-item-tile class="tile left text-amber" sublabel>{{item[0].data.convidado4}}</q-item-tile>
                   </q-item-main>
                 </q-item>
+                <q-item tag="label">
+                  <q-item-side>
+                    <q-radio color="amber" v-model="item[0].data.check" :val="item[0].data.titulo5" />
+                  </q-item-side>
+                  <q-item-main>
+                    <q-item-tile class="tile left text-white lulo" label>{{item[0].data.titulo5}}</q-item-tile>
+                  </q-item-main>
+                </q-item>
+                <q-item tag="label">
+                  <q-item-side>
+                    <q-radio color="amber" v-model="item[0].data.check" :val="item[0].data.titulo6" />
+                  </q-item-side>
+                  <q-item-main>
+                    <q-item-tile class="tile left text-white lulo" label>{{item[0].data.titulo6}}</q-item-tile>
+                  </q-item-main>
+                </q-item>
                 <q-btn color="positive" @click="salvarJornada()" label="Salvar"></q-btn>
               </div>
             </div>
