@@ -114,7 +114,8 @@ module.exports = function (ctx) {
         'QRouteTab',
         'QCarousel',
         'QCarouselSlide',
-        'QCarouselControl'
+        'QCarouselControl',
+        'QSlideTransition'
       ],
       directives: [
         'Ripple',

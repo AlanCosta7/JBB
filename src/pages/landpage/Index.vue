@@ -433,7 +433,7 @@
                   class="q-px-md flex flex-center lulo"
                 >Aqui você encontra as melhores opções para ficar bem acomodado durante o Despertar19.</h5>
                 <div class="row">
-                  <div class="col-lg-6 col-xs-12 cardhotel q-pa-lg">
+                  <div class="col-lg-6 col-xs-12 q-pa-lg">
                     <div inline class="bg-white">
                       <div class="flex flex-center">
                         <img width="220px" height="auto" src="~assets/landpage/costaf.png" />
@@ -448,7 +448,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-6 col-xs-12 cardhotel q-pa-lg">
+                  <div class="col-lg-6 col-xs-12 q-pa-lg">
                     <div inline class="bg-white">
                       <div class="flex flex-center">
                         <img width="220px" height="auto" src="~assets/landpage/econ.png" />
