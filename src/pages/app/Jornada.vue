@@ -323,7 +323,6 @@ export default {
     this.$q.loading.show();
     await this.$store.dispatch("jornada/loadMaps");
     this.$q.loading.hide();
-    console.log(this.listaMaps);
   },
   methods: {
     openToolDescription() {

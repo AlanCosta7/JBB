@@ -31,7 +31,7 @@
         <q-item link @click.native="vip()" v-if="!currentUser">
           <q-item-main class="text-no-wrap" label="VIP" sublabel="Restrito para inscritos" />
         </q-item>
-        <q-item link @click.native="jornada()" v-if="currentUser  && inscrito">
+        <q-item link @click.native="jornada()" v-if="currentUser && inscrito && !listaMapsEx">
           <q-item-main
             class="text-no-wrap"
             label="Jornada"
@@ -135,6 +135,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      listaMaps: "jornada/listaMaps",
       startvoto: "eleicao/startvoto",
       inscrito: "inscrito",
       loading: "loading",
@@ -142,7 +143,12 @@ export default {
       user: "user",
       currentUser: "currentUser",
       video: "video"
-    })
+    }),
+    listaMapsEx() {
+      var listaMaps = this.listaMaps
+      var listaMapsEx = listaMaps.length == 0 ? true : false
+      return listaMapsEx
+    }
   },
   async mounted() {
     this.$q.loading.show();
