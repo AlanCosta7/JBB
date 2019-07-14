@@ -71,6 +71,20 @@ export default new Vuex.Store({
     loading: state => state.loading,
     error(state) {
       return state.error
+    },
+    userRanking(state) {
+      var ranking = state.quiz.ranking
+      var uid = state.user.currentUser.uid
+      for (let i = 0; i < ranking.length; i++) {
+        const element = ranking[i]
+        if (uid == element.data.uid) {
+          var id = element.id
+          console.log(id)
+
+          return id
+        }   
+        
+      }  
     }
   }
 })

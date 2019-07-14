@@ -4,7 +4,7 @@
           <q-btn :icon-right="openedJornada ? 'keyboard_arrow_up' : 'keyboard_arrow_down'" @click="openToolDescription()" label="Programação" flat color="white" class="relative-position"></q-btn>
         </div>
     <q-slide-transition>
-      <div class="q-ma-md q-pa-md bg-orange" v-show="openedJornada">
+      <div class="q-ma-md q-pa-md bg-white" v-show="openedJornada">
             <div class="text-center">
               <div class="row q-pa-md">
                 
@@ -13,19 +13,19 @@
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">9h</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Inscrições e check-in</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Inscrições e check-in</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">17h30min - 19h</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Tardezinhas</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Tardezinhas</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">19h15min - 21h</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Culto de abertura</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Culto de abertura</q-item-tile>
                     </q-item-main>
                   </q-item>
                 </div>
@@ -34,20 +34,20 @@
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">8h30min - 9h</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Oração</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Oração</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">9h - 10h30min</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Celebração</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Celebração</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">{{listaMaps[0].data.p1[0].data.horario}}</p>
-                      <q-item-tile class="tile left text-amber-4 q-body-1" label>Jornada de conteúdo</q-item-tile>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>{{listaMaps[0].data.p1[0].data.check}}</q-item-tile>
+                      <q-item-tile class="tile left text-red q-body-1" label>Jornada de conteúdo</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>{{listaMaps[0].data.p1[0].data.check}}</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
@@ -59,27 +59,27 @@
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">{{listaMaps[0].data.p2[0].data.horario}}</p>
-                      <q-item-tile class="tile left text-amber-4 q-body-1" label>Jornada de conteúdo</q-item-tile>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>{{listaMaps[0].data.p2[0].data.check}}</q-item-tile>
+                      <q-item-tile class="tile left text-red q-body-1" label>Jornada de conteúdo</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>{{listaMaps[0].data.p2[0].data.check}}</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">{{listaMaps[0].data.p3[0].data.horario}}</p>
-                      <q-item-tile class="tile left text-amber-4 q-body-1" label>Jornada de conteúdo</q-item-tile>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>{{listaMaps[0].data.p3[0].data.check}}</q-item-tile>
+                      <q-item-tile class="tile left text-red q-body-1" label>Jornada de conteúdo</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>{{listaMaps[0].data.p3[0].data.check}}</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">17h30min - 19h</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Tardezinhas</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Tardezinhas</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">19h15min - 21h</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Celebração</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Celebração</q-item-tile>
                     </q-item-main>
                   </q-item>
                 </div>
@@ -88,52 +88,52 @@
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">8h30min - 9h</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Oração</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Oração</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">9h - 10h30min</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Celebração</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Celebração</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">{{listaMaps[0].data.p4[0].data.horario}}</p>
-                      <q-item-tile class="tile left text-amber-4 q-body-1" label>Jornada de conteúdo</q-item-tile>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>{{listaMaps[0].data.p4[0].data.check}}</q-item-tile>
+                      <q-item-tile class="tile left text-red q-body-1" label>Jornada de conteúdo</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>{{listaMaps[0].data.p4[0].data.check}}</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">12h - 13h30min</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Almoço</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Almoço</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">{{listaMaps[0].data.p5[0].data.horario}}</p>
-                      <q-item-tile class="tile left text-amber-4 q-body-1" label>Jornada de conteúdo</q-item-tile>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>{{listaMaps[0].data.p5[0].data.check}}</q-item-tile>
+                      <q-item-tile class="tile left text-red q-body-1" label>Jornada de conteúdo</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>{{listaMaps[0].data.p5[0].data.check}}</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">{{listaMaps[0].data.p6[0].data.horario}}</p>
-                      <q-item-tile class="tile left text-amber-4 q-body-1" label>Jornada de conteúdo</q-item-tile>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>{{listaMaps[0].data.p6[0].data.check}}</q-item-tile>
+                      <q-item-tile class="tile left text-red q-body-1" label>Jornada de conteúdo</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>{{listaMaps[0].data.p6[0].data.check}}</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">17h30min - 19h</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Tardezinhas</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Tardezinhas</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">19h15min - 21h</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Celebração</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Celebração</q-item-tile>
                     </q-item-main>
                   </q-item>
                 </div>
@@ -142,58 +142,58 @@
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">8h30min - 9h</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Oração</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Oração</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">9h - 10h30min</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Celebração</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Celebração</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">{{listaMaps[0].data.p7[0].data.horario}}</p>
-                      <q-item-tile class="tile left text-amber-4 q-body-1" label>Jornada de conteúdo</q-item-tile>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>{{listaMaps[0].data.p7[0].data.check}}</q-item-tile>
+                      <q-item-tile class="tile left text-red q-body-1" label>Jornada de conteúdo</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>{{listaMaps[0].data.p7[0].data.check}}</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">12h - 13h30min</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Almoço</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Almoço</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">{{listaMaps[0].data.p8[0].data.horario}}</p>
-                      <q-item-tile class="tile left text-amber-4 q-body-1" label>Jornada de conteúdo</q-item-tile>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>{{listaMaps[0].data.p8[0].data.check}}</q-item-tile>
+                      <q-item-tile class="tile left text-red q-body-1" label>Jornada de conteúdo</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>{{listaMaps[0].data.p8[0].data.check}}</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">{{listaMaps[0].data.p9[0].data.horario}}</p>
-                      <q-item-tile class="tile left text-amber-4 q-body-1" label>Jornada de conteúdo</q-item-tile>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>{{listaMaps[0].data.p9[0].data.check}}</q-item-tile>
+                      <q-item-tile class="tile left text-red q-body-1" label>Jornada de conteúdo</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>{{listaMaps[0].data.p9[0].data.check}}</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">17h30min - 19h</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Tardezinhas</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Tardezinhas</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">19h15min - 21h</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Celebração</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Celebração</q-item-tile>
                     </q-item-main>
                   </q-item>
                   <q-item tag="label">
                     <q-item-main>
                       <p class="text-primary q-caption">23h</p>
-                      <q-item-tile class="tile left text-white lulo q-body-1" label>Lual</q-item-tile>
+                      <q-item-tile class="tile left text-orange lulo q-body-1" label>Lual</q-item-tile>
                     </q-item-main>
                   </q-item>
                 </div>

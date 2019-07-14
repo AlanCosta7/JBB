@@ -84,6 +84,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      userRanking: "userRanking",
       ranking: "quiz/ranking",
       currentPergunta: "quiz/currentPergunta",
       listaQuiz: "quiz/listaQuiz",
@@ -101,20 +102,6 @@ export default {
       return ref[0].data.pontos               
       }
       return 0//ref[0].data.pontos       
-    },
-    userRanking() {
-      var ranking = this.ranking
-      var uid = this.user.uid
-      for (let i = 0; i < ranking.length; i++) {
-        const element = ranking[i]
-        if (uid === element.data.uid) {
-          var id = element.data.id
-          return id
-        } else {
-        return null
-      }   
-        
-      }    
     }
   },
   async mounted() {
@@ -122,7 +109,7 @@ export default {
     await this.$store.dispatch('quiz/watchQuiz')
     await this.$store.dispatch("quiz/loadRanking")
     this.$q.loading.hide()  
-    console.log(this.userPontos)
+    console.log(this.userRanking)
   },
   methods: {
    async salvarResposta(item) {
@@ -154,7 +141,7 @@ export default {
         }
         let i = this.index
         i++
-        if (i < 9) {
+        if (i < 40) {
           this.$store.dispatch('quiz/addIndex', i )
         } else {
           var user = this.user
