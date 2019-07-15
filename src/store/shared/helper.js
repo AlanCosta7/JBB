@@ -111,6 +111,16 @@ export async function addCpf(newCard) {
   return docRef
 }
 
+export async function addUid(newCard) {
+
+  const docRef = await $firestore
+    .collection('listaUID')
+    .add(newCard) 
+
+  console.info('Doc adicionado:', docRef)
+  return docRef
+}
+
 export async function updateDoc(pid, collectionName, docId, docData) {
   assert(pid, 'projectId')
 

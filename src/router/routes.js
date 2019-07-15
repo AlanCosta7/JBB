@@ -21,6 +21,7 @@ const routes = [
       { path: 'checkin', name: 'checkin', component: () => import('pages/app/Checkin') },
       { path: 'quiz', name: 'quiz', component: () => import('pages/app/Quiz') },
       { path: 'admin', name: 'admin', component: () => import('pages/app/Admin') },
+      { path: 'dashboard', name: 'dashboard', component: () => import('pages/app/Dashboard') },
       { path: 'ranking', name: 'ranking', component: () => import('pages/app/Ranking') },
       { path: 'votacao', component: () => import('pages/app/Votacao') },
     ]

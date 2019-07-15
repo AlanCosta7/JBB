@@ -8,12 +8,13 @@ import user from './user/index-firebase'
 import jornada from './module/jornada'
 import quiz from './module/quiz'
 import eleicao from './module/eleicao'
+import painel from './module/painel'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    user, jornada, quiz, eleicao
+    user, jornada, quiz, eleicao, painel
   },
   state: {
     inscricao: "https://www.pallua.com.br/captacao/projeto/evento_despertar_2019",

@@ -21,7 +21,7 @@ register(process.env.SERVICE_WORKER_FILE, {
   updated (registration) { // registration -> a ServiceWorkerRegistration instance
     console.log('New content is available; please refresh.')
 
-    if (window.confirm('Existe uma versão disponível. Deseja atualizar?')) {
+    if (window.confirm('Existe uma nova versão disponível. Deseja atualizar?')) {
       // window.__refreshing = true
       window.location.reload(true)
     } else {

@@ -147,11 +147,10 @@ export default {
     }
   },
   async mounted() {
-    this.$q.loading.show();
-    await this.$store.dispatch("quiz/watchQuiz");
-    await this.$store.dispatch("quiz/loadRanking");
-    this.$q.loading.hide();
-    console.log(this.userRanking);
+    this.$q.loading.show()
+    await this.$store.dispatch("quiz/watchQuiz")
+    await this.$store.dispatch("quiz/loadRanking")
+    this.$q.loading.hide()
   },
   methods: {
     async salvarResposta(item) {
