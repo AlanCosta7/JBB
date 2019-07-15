@@ -15,7 +15,7 @@
       <div class="flex flex-center">
         <div class="flex flex-center column shadow-6 cardlogin" v-show="!currentUser">
           <h2 class="text-primary text-bold">Entre</h2>
-          <p class="subtitulo lulo">
+          <p class="lulo">
             A experiência do
             <br />
             <b>Despertar 19</b>
@@ -25,7 +25,7 @@
         </div>
         <div class="flex flex-center column shadow-6 cardlogin" v-show="currentUser">
           <h2 class="text-primary text-bold">Redirecionando...</h2>
-          <p class="subtitulo">Você já está conectado!</p>
+          <p class="">Você já está conectado!</p>
           <!-- <div>
                   <p class="q-mt-lg q-mb-none text-center">O que você quer?</p>
                   <q-btn class="q-ma-lg" color="negative" flat @click="logout()">Desconectar</q-btn>
