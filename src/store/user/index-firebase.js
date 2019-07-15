@@ -17,8 +17,7 @@ export default {
   getters: {
     checkin(state) {
       var uid = state.currentUser.uid
-      var cod = "https://despertar-checkin.surge.sh/#/users/" + uid + "/checkin"
-      return state.checkin = cod
+      return state.checkin = uid
     },
     inscrito(state) {
       return state.inscrito
@@ -102,14 +101,14 @@ export default {
       for (let i = 0; i < listaCpf.length; i++) {
         const element = listaCpf[i].data.cpf
         if (element === newCard.cpf) {
-          listaGeral.push(element) 
+          listaGeral.push(element)
         }
       }
 
       console.log(listaGeral)
 
       if (listaGeral.length == 0) {
-        const docRef = await addCpf(newCard)  
+        const docRef = await addCpf(newCard)
         Notify.create({
           message: 'CPF cadastrado com sucesso',
           timeout: 1000,
@@ -129,7 +128,7 @@ export default {
           position: 'bottom',
         })
       }
-    
+
     },
 
     async loadCadastro({ rootState, commit }) {
@@ -216,7 +215,7 @@ export default {
 
     async loadEleicao({ rootState, commit }) {
       commit('startLoading')
-    
+
       const cards = await $firestore
         .collection('eleicao')
         .doc('boleano')
@@ -228,7 +227,7 @@ export default {
         .then(mapQuerySnapshot)
 
         commit('setEleicao', cards)
-    
+
       commit('stopLoading')
     }
   }
