@@ -20,6 +20,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      listamap: 'painel/listamap',
       ncadastro: "painel/ncadastro",
       loading: "loading",
       error: "error",
@@ -27,9 +28,11 @@ export default {
     })
   },
   async mounted() {
-    this.$q.loading.show();
-    await this.$store.dispatch("painel/loadUid");
-    this.$q.loading.hide();
+    this.$q.loading.show()
+    await this.$store.dispatch("painel/loadUid")
+    await this.$store.dispatch("painel/painelJornada")
+    this.$q.loading.hide()
+    console.log(this.listamap)
   },
   methods: {
     async addUID() {

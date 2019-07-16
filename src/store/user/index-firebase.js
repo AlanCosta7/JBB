@@ -23,7 +23,7 @@ export default {
       return state.inscrito
     },
     eleicao(state) {
-      return state.eleicao[0].data.jbb
+      return state.eleicao
     },
     loading(state) {
       return state.loading

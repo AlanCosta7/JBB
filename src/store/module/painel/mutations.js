@@ -1,4 +1,11 @@
 
+export const setListaMap = (state, payload) => {
+  state.listamap = payload
+}
+export const setListaUID = (state, payload) => {
+  state.listauid = payload
+}
+
 export const setNCadastro = (state, payload) => {
   state.ncadastro = payload
 }

@@ -104,7 +104,7 @@ export default {
     }
   },
   async mounted() {
-    
+    console.log(this.currentCadastrado)
     this.$q.loading.show()
     await this.$store.dispatch('loadCadastro')
     this.$q.loading.hide()

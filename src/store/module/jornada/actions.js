@@ -48,7 +48,6 @@ export const salvaJornada = async ({rootState, commit}, {id, data}) => {
     .collection('map')
     .doc(id)
     .update(newCard)
-
 }
 
 export const loadMaps = async ({ rootState, commit }) => {

@@ -49,19 +49,39 @@ export const salvaUid = async ({ commit }, { data }) => {
 
 }
 
-
 export const loadUid = async({ commit }) => {
   commit('startLoading')
 
   const uid = await $firestore
-    .collection('usuario')
+    .collection('listaUID')
     .get()
     .then(mapQuerySnapshot)
     .catch(err => {
       console.error('Erro ao tentar carregar "cadastro"', err)
     })
-
-    console.log(uid)
-
+    
+    commit('setListaUID', uid)
   commit('stopLoading')
+}
+
+export const painelJornada = async({ commit, state }) => {
+
+  const listaUID = state.listauid
+ // console.log(listaUID)
+  var listaMap = []
+  for (let i = 0; i < listaUID.length; i++) {
+    const element = listaUID[i].data.uid
+    
+  const map = await $firestore
+    .collection('usuario')
+    .doc(element)
+    .collection('map')
+    .get()
+    .then(mapQuerySnapshot)
+    .catch(err => {
+      console.error('Erro ao tentar carregar "cadastro"', err)
+    })
+    listaMap.push(map)
+  }
+  commit('setListaMap', listaMap)
 }
