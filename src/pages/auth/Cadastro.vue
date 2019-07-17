@@ -108,6 +108,7 @@ export default {
     this.$q.loading.show()
     await this.$store.dispatch('loadCadastro')
     this.$q.loading.hide()
+    //Verificar - Criar um modal que chama os dados cadastrados, permitir o usuário atualizar
      if (this.currentCadastrado.length > 0) {
       const rediretDelay = 2000;
       this.redirectToApp(rediretDelay);

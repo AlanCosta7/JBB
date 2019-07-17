@@ -32,9 +32,6 @@
         <q-item link @click.native="vip()">
           <q-item-main class="text-no-wrap" label="VIP" sublabel="Restrito para inscritos" />
         </q-item>
-        <q-item link @click.native="inscricao()">
-          <q-item-main class="text-no-wrap" label="Inscrição" sublabel="Já fez a sua?" />
-        </q-item>
         <q-item link @click.native="comochegar()">
           <q-item-main
             class="text-no-wrap"
@@ -84,14 +81,6 @@
             />
             <p class="fe1 desktop-only">Fé, Esperança e Amor</p>
             <p class="fe2 mobile-only">Fé, Esperança e Amor</p>
-            <q-btn
-              @click="openedinscri = true"
-              label="Inscreva-se"
-              size="20px"
-              color="orange"
-              rounded
-              class="desktop-only btnins q-mt-xl text-brown-10"
-            ></q-btn>
             <q-btn
               @click="inscricao()"
               label="Inscreva-se"
@@ -523,14 +512,6 @@
             alegria, e queremos dar essa oportunidade pra você.
           </p>
           <q-btn
-            @click="openedinscri = true"
-            label="Inscreva-se"
-            size="20px"
-            color="brown-10"
-            rounded
-            class="desktop-only btnins q-px-lg text-orange q-mb-xl"
-          ></q-btn>
-          <q-btn
             @click="inscricao()"
             label="Inscreva-se"
             size="20px"
@@ -641,20 +622,6 @@
       />
     </q-modal>
 
-    <!-- Modal Inscrição Desktop-->
-    <q-modal v-model="openedinscri">
-      <q-modal-layout>
-        <q-toolbar slot="header">
-          <q-toolbar-title>Inscrição</q-toolbar-title>
-        </q-toolbar>
-        <iframe
-          class="modelInscricao"
-          src="https://www.pallua.com.br/captacao/projeto/evento_despertar_2019"
-        ></iframe>
-        <q-btn class="mobile-only" color="negative" label="Cancelar" @click="openedinscri = false"></q-btn>
-      </q-modal-layout>
-    </q-modal>
-
     <!-- Modal Maps -->
     <q-modal v-model="openedmap">
       <iframe
@@ -687,7 +654,6 @@ export default {
     return {
       jbbtv: false,
       opened: false,
-      openedinscri: false,
       openedmap: false,
       hidden1: false,
       hidden2: false,
@@ -752,11 +718,6 @@ export default {
     playvideo() {
       this.$store.dispatch("assistirVideoPromo");
       this.opened = true;
-    },
-    inscricao() {
-      this.openedinscri = true;
-      const $menuDrawer = this.$refs.menuDrawer;
-        $menuDrawer.hide();
     },
     vip() {
       this.$router.push("/login");

@@ -1,9 +1,6 @@
 <template>
   <q-page class="flex flex-center column" id="page-chekin">
-    <q-field :count="11" helper="Apenas número" class="q-my-md">
-      <q-input :maxlength="11" placeholder="Digite o CPF" v-model="cpf" autofocus />
-    </q-field>
-    <q-btn label="Enviar" color="positive" @click="addUID"></q-btn>
+    <q-btn label="Atualizar" color="positive" @click="atualizar"></q-btn>
   </q-page>
 </template>
 
@@ -20,6 +17,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+        titulo1_5: 'painel/titulo1_5',
       listamap: 'painel/listamap',
       ncadastro: "painel/ncadastro",
       loading: "loading",
@@ -28,13 +26,15 @@ export default {
     })
   },
   async mounted() {
+  },
+  methods: {
+    async atualizar () {
     this.$q.loading.show()
     await this.$store.dispatch("painel/loadUid")
     await this.$store.dispatch("painel/painelJornada")
     this.$q.loading.hide()
     console.log(this.listamap)
-  },
-  methods: {
+    },
     async addUID() {
 //122
       for (let i = 0; i < listaUid.length; i++) {

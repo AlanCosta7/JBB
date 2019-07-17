@@ -103,19 +103,6 @@
       <q-btn class="mobile-only" color="negative" label="Cancelar" @click="openedmap = false"></q-btn>
     </q-modal>
 
-    <!-- Modal Inscrição -->
-    <q-modal v-model="openedinscri">
-      <q-modal-layout>
-        <q-toolbar slot="header">
-          <q-toolbar-title>Inscrição</q-toolbar-title>
-        </q-toolbar>
-        <iframe
-          class="modelInscricao"
-          src="https://www.pallua.com.br/captacao/projeto/evento_despertar_2019"
-        ></iframe>
-        <q-btn class="mobile-only" color="negative" label="Cancelar" @click="openedinscri = false"></q-btn>
-      </q-modal-layout>
-    </q-modal>
   </q-layout>
 </template>
 
@@ -127,7 +114,6 @@ export default {
   name: "MyLayout",
   data() {
     return {
-      openedinscri: false,
       openedmap: false,
       jbbtv: false,
       btnjbbtv: true
@@ -203,11 +189,6 @@ export default {
           timeout: 1500
         });
       }
-    },
-    inscricao() {
-      this.openedinscri = true;
-      const $menuDrawer = this.$refs.menuDrawer;
-      $menuDrawer.hide();
     },
     jornada() {
       this.$router.push("/app/jornada");

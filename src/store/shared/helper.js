@@ -46,7 +46,7 @@ export async function addDoc(uid, jornada) {
     .collection('usuario')
     .doc(uid)
     .collection('map')
-    .set(jornada) 
+    .add(jornada) 
 
   console.info('Doc adicionado:', docRef)
   return docRef
