@@ -2,9 +2,9 @@
     <q-page id="page-votacao">
     <div class="q-pa-md row flex flex-center bg-tertiary">
         <div v-if="startvoto"> <h3>Seu voto já foi registrado</h3></div>
-        <div v-if="eleicao !== true"> <h3>A eleição será na Sexta-feira</h3></div>
+        <div v-if="eleicao[0].data.jbb !== true"> <h3>A eleição será na Sexta-feira</h3></div>
 
-      <q-carousel v-model="slide" color="amber" arrows height="470px" v-if="!startvoto && eleicao == true">
+      <q-carousel v-model="slide" color="amber" arrows height="470px" v-if="!startvoto && eleicao[0].data.jbb == true">
         <q-carousel-slide class="bg-white">
           <div class="text-center">
             <div class="flex flex-center">
@@ -112,7 +112,7 @@
         </q-carousel-slide>
       </q-carousel>
       <div class="flex flex-center q-ma-md">
-        <q-btn :disable="liberado" color="positive" @click="votar()" label="Votar" v-if="!startvoto && eleicao == true"></q-btn>
+        <q-btn :disable="liberado" color="positive" @click="votar()" label="Votar" v-if="!startvoto && eleicao[0].data.jbb == true"></q-btn>
       </div>
     </div>
     </q-page>

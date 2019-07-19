@@ -1,4 +1,5 @@
 export default {
+  resultado: [],
   listauid: [],
   listamap: [],
   ncadastro: [],

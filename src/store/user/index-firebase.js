@@ -236,7 +236,6 @@ export default {
           console.error('Erro ao tentar carregar "cadastro"', err)
         })
         .then(mapQuerySnapshot)
-
         commit('setEleicao', cards)
 
       commit('stopLoading')

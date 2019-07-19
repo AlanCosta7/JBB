@@ -85,3 +85,29 @@ export const painelJornada = async({ commit, state }) => {
   }
   commit('setListaMap', listaMap)
 }
+
+
+export const resultado = async({ commit, state }) => {
+
+  const listaUID = state.listauid
+ // console.log(listaUID)
+  var listaMap = []
+  for (let i = 0; i < listaUID.length; i++) {
+    const element = listaUID[i].data.uid
+    
+  const map = await $firestore
+    .collection('eleicao')
+    .doc('resultado')
+    .collection(element)
+    .get()
+    .then(mapQuerySnapshot)
+    .catch(err => {
+      console.error('Erro ao tentar carregar "cadastro"', err)
+    })
+
+    listaMap.push(map)
+    console.log(map.length)
+
+  }
+  commit('setResultado', listaMap)
+}

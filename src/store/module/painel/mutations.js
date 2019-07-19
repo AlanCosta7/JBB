@@ -17,3 +17,7 @@ export const startLoading = state => {
 export const stopLoading = state => {
   state.loading = false
 }
+
+export const setResultado = state => {
+  state.resultado = false
+}

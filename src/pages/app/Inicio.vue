@@ -9,6 +9,7 @@
                 <img class="avatar" :src="user.photoURL" id="photoURL" />
               </div>
               <h6 class="q-mt-xl text-white lulo">Olá! {{user.nome}}</h6>
+              <p class="q-mt-xl text-white lulo">CPF: {{currentCadastrado}}</p>
             </div>
           </div>
         </q-carousel-slide>
@@ -93,6 +94,7 @@ export default {
   },
   computed: {
     ...mapGetters({
+      currentCadastrado: "currentCadastrado",
       inscrito: "inscrito",
       jornada: "jornada/jornada",
       listaMaps: "jornada/listaMaps",
@@ -103,8 +105,9 @@ export default {
   },
   async mounted() {
     this.$q.loading.show();
-    await this.$store.dispatch("jornada/watchJornada");
-    await this.$store.dispatch("jornada/loadMaps");
+    await this.$store.dispatch("jornada/watchJornada")
+    await this.$store.dispatch("jornada/loadMaps")
+    await this.$store.dispatch("eleicao/loadVoto")
     this.$q.loading.hide();
 
     if (this.listaMaps == true) {

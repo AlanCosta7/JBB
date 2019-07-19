@@ -51,7 +51,7 @@
         <q-item link @click.native="checkin()" v-if="currentUser && inscrito">
           <q-item-main class="text-no-wrap" label="Checkin" sublabel="Registre sua presença" />
         </q-item>
-        <q-item link @click.native="eleição()" v-if="currentUser && inscrito">
+        <q-item link @click.native="eleição()" v-if="currentUser && inscrito" v-show="!startvoto">
           <q-item-main class="text-no-wrap" label="Eleição" sublabel="Escolha seu representante" />
         </q-item>
         <q-item link @click.native="quiz()" v-if="currentUser && inscrito">
