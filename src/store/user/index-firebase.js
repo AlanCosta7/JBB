@@ -97,6 +97,19 @@ export default {
       return docRef
     },
 
+    async lerCpf() {
+
+      const listaCpf = await $firestore
+        .collection('inscritos')
+        .get()
+        .catch(err => {
+          console.error('Erro ao tentar carregar "cadastro"', err)
+        })
+        .then(mapQuerySnapshot)
+        
+        console.log(listaCpf)
+    },
+
     async salvaCpf({ rootState, commit }, { data }) {
       const validKeys = ['cpf']
       const newCard = pick(data, validKeys)
@@ -109,6 +122,8 @@ export default {
         })
         .then(mapQuerySnapshot)
 
+        console.log(listaCpf.length)
+
       var listaGeral = []
 
       for (let i = 0; i < listaCpf.length; i++) {
@@ -117,7 +132,6 @@ export default {
           listaGeral.push(element)
         }
       }
-
       if (listaGeral.length == 0) {
         const docRef = await addCpf(newCard)
         Notify.create({

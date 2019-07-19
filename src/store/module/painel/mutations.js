@@ -18,6 +18,6 @@ export const stopLoading = state => {
   state.loading = false
 }
 
-export const setResultado = state => {
-  state.resultado = false
+export const setResultado = (state, payload) => {
+  state.resultado = payload
 }

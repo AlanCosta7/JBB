@@ -104,10 +104,11 @@ export const resultado = async({ commit, state }) => {
     .catch(err => {
       console.error('Erro ao tentar carregar "cadastro"', err)
     })
+    
+    if (map.length !== 0) {
+      listaMap.push(map)
+    }
     console.log(map.length)
-    listaMap.push(map)
-
   }
-  console.log(listaMap)
   commit('setResultado', listaMap)
 }
