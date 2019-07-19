@@ -142,7 +142,7 @@ export default {
                 centrooeste: 'eleicao/centrooeste',
                 norte: 'eleicao/norte',
                 nordeste: 'eleicao/nordeste',
-                sul: 'eleicao/centrooeste',
+                sul: 'eleicao/sul',
                 suldeste: 'eleicao/suldeste',
                 startvoto: 'eleicao/startvoto',
                 loading: 'loading',

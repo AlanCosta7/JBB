@@ -117,8 +117,8 @@ export default {
     var resultado = this.resultado
     var lista = []
     for (let i = 0; i < resultado.length; i++) {
-      const element = resultado
-      lista.push(element)     
+      const element = resultado[0].data
+      lista.push(element)
     }
     return lista
     },
@@ -205,12 +205,13 @@ export default {
   }
   },
   async mounted() {
-    console.log(this.resultado)
+        console.log(this.norte)
+
   },
   methods: {
     async atualizarresultado () {
       this.$q.loading.show()
-      await this.$store.dispatch("painel/resultado")
+       await this.$store.dispatch("painel/resultado")
       this.$q.loading.hide()
       console.log(this.resultado)
     },

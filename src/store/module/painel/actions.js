@@ -81,7 +81,7 @@ export const painelJornada = async({ commit, state }) => {
     .catch(err => {
       console.error('Erro ao tentar carregar "cadastro"', err)
     })
-    listaMap.push(map)
+    listaMap.push(map) 
   }
   commit('setListaMap', listaMap)
 }
@@ -104,10 +104,10 @@ export const resultado = async({ commit, state }) => {
     .catch(err => {
       console.error('Erro ao tentar carregar "cadastro"', err)
     })
-
-    listaMap.push(map)
     console.log(map.length)
+    listaMap.push(map)
 
   }
+  console.log(listaMap)
   commit('setResultado', listaMap)
 }
