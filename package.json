@@ -18,7 +18,7 @@
     "cordova": "quasar build -m cordova -T android -t mat"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "firebase": "^6.1.0",
     "firebaseui": "^4.0.0",
     "lodash-es": "^4.17.11",
